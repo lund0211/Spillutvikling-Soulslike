@@ -22,7 +22,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider Other)
     {
+
         Debug.Log("You have been hit");
-        Other.GetComponent<HealthBehavior>().AdjustHealthBy(-Damage);
+        Player Player = Other.GetComponent<Player>();
+        HealthBehavior Health = Other.GetComponent<HealthBehavior>();
+      
+          
+        if(Player != null)
+        {
+            if(Player != null && !Player.GetIsDodging())
+            {
+                Health.AdjustHealthBy(-Damage);
+            }
+        }
     }
 }
