@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bff816f3141b57b4591afd4230696346
+guid: ba16201249f1be7448999eba2b4cde52
 ModelImporter:
   serializedVersion: 24300
   internalIDToNameTable: []
@@ -35,8 +35,8 @@ ModelImporter:
       name: Rolling
       takeName: mixamo.com
       internalID: -203655887218126122
-      firstFrame: 8
-      lastFrame: 71
+      firstFrame: 0
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -45,13 +45,13 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
