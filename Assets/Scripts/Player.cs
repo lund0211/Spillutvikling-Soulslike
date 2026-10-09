@@ -84,7 +84,6 @@ public class Player : MonoBehaviour
 
     public void OnSprint(InputAction.CallbackContext Context)
     {
-        Debug.Log(Context.phase);
         if (Context.performed)
         {
             IsSprinting = true;
@@ -104,8 +103,6 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Dodge");
         IsDodging = true;
         CanDodge = false;
-
-        Debug.Log("You are dodging");
 
         yield return new WaitForSeconds(IFramesTime);
 
@@ -167,6 +164,11 @@ public class Player : MonoBehaviour
 
 
     void Update()
+    {
+        
+    }
+
+    private void FixedUpdate()
     {
         MovementFunc();
         animator.SetFloat("Speed", Movement.magnitude);
