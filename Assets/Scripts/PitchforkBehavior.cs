@@ -11,6 +11,8 @@ public class PitchforkBehavior : MonoBehaviour
     Transform Player;
     [SerializeField]
     Transform Witch;
+    [SerializeField]
+    Transform WitchHand;
     
 
     Vector3 Direction;
@@ -84,8 +86,8 @@ public class PitchforkBehavior : MonoBehaviour
 
         //rb.isKinematic = false;
         //rb.linearVelocity = Vector3.zero;
-        Transform Hand = GameObject.Find("mixamorig:RightHand").transform;
-        transform.SetParent(Hand);
+        //Transform Hand = GameObject.Find("mixamorig:RightHand").transform;
+        transform.SetParent(WitchHand);
         transform.localPosition = LocalPitchforkPosition;
         transform.localRotation = LocalPitchforkRotation;
         HasReturned = true;

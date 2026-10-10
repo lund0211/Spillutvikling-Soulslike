@@ -65,7 +65,7 @@ public class PlagueWitchBehavior : MonoBehaviour
         if ((CanAttack == true) && (Vector3.Dot(transform.forward, PlayerDirection) >= 0.99))
         {
             CanAttack = false;
-            //CurrentAttack = (AttackType)Random.Range(0, 2);
+            CurrentAttack = (AttackType)Random.Range(0, 2);
             StartCoroutine(AttackCooldownTimer());
         }
         if(!LockRotation)
@@ -106,11 +106,11 @@ public class PlagueWitchBehavior : MonoBehaviour
                 break;
         }
 
-        while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f ) {
+        //while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f ) {
             //Agent.velocity = new Vector3(0, 0, 0);
-            Agent.isStopped = true;
-            yield return null;
-        }
+            //Agent.isStopped = true;
+            //yield return null;
+        //}
         Agent.isStopped = false;
         yield return new WaitForSeconds(AttackCooldown);
 
