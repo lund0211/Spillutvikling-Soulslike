@@ -35,6 +35,14 @@ public class PlagueWitchBehavior : MonoBehaviour
     [SerializeField]
     float TurnSpeed = 0.1f;
 
+<<<<<<< Updated upstream
+=======
+    AttackType CurrentAttack;
+
+    public bool LockRotation = false;
+    
+
+>>>>>>> Stashed changes
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -85,10 +93,19 @@ public class PlagueWitchBehavior : MonoBehaviour
                 break;
         }
 
+<<<<<<< Updated upstream
         while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f) {
             Agent.velocity = new Vector3(0, 0, 0);
             yield return null;
         }
+=======
+        //while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f ) {
+            //Agent.velocity = new Vector3(0, 0, 0);
+            //Agent.isStopped = true;
+            //yield return null;
+        //}
+        Agent.isStopped = false;
+>>>>>>> Stashed changes
         yield return new WaitForSeconds(AttackCooldown);
         CanAttack = true;
     }
