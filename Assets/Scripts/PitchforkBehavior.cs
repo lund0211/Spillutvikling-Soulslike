@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PitchforkBehavior : MonoBehaviour
@@ -9,35 +8,33 @@ public class PitchforkBehavior : MonoBehaviour
     Rigidbody rb;
     [SerializeField]
     Transform Player;
+<<<<<<< Updated upstream
+    Vector3 PlayerPosition;
+=======
     [SerializeField]
     Transform Witch;
+    [SerializeField]
+    Transform WitchHand;
     
 
+>>>>>>> Stashed changes
     Vector3 Direction;
 
     [SerializeField]
     float PitchforkSpeed = 20.0f;
     [SerializeField]
-    float PitchforkFlightTime = 3.0f;
-
-    public bool HasReturned = true;
-
-    Vector3 PitchforkStartPosition;
-    Vector3 LocalPitchforkPosition;
-    Quaternion LocalPitchforkRotation;
-    float AimHeight = 0.2f;
+    float PitchForkFlightTime = 3.0f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        LocalPitchforkPosition = transform.localPosition;
-        LocalPitchforkRotation = transform.localRotation;
+        ThrowPitchfork();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+     
     }
 
 
@@ -48,9 +45,13 @@ public class PitchforkBehavior : MonoBehaviour
 
     private IEnumerator FlightTime()
     {
-        PitchforkStartPosition = transform.position;
         transform.SetParent(null);
         rb.isKinematic = false;
+<<<<<<< Updated upstream
+        PlayerPosition = Player.position;
+        Direction = PlayerPosition - rb.position;
+        Direction.y = 0;
+=======
         //Direction = transform.forward;
         //Direction = (Player.position - transform.position);
         //Direction = Witch.forward;
@@ -62,17 +63,18 @@ public class PitchforkBehavior : MonoBehaviour
         float Ratio = YDistance / XZDistance;
         Direction = new Vector3(Witch.forward.x, Ratio + AimHeight , Witch.forward.z);
 
-
-
-
+>>>>>>> Stashed changes
         Direction.Normalize();
-        transform.rotation = Quaternion.LookRotation(Direction);
-
         rb.linearVelocity = Direction * PitchforkSpeed;
-        yield return new WaitForSeconds(PitchforkFlightTime);
-        //rb.isKinematic = false;
-        //rb.linearVelocity = -Direction * PitchforkSpeed;
+        yield return new WaitForSeconds(PitchForkFlightTime);
+        rb.linearVelocity = -Direction * PitchforkSpeed;
+        yield return new WaitForSeconds(PitchForkFlightTime);
         rb.linearVelocity = Vector3.zero;
+<<<<<<< Updated upstream
+        Transform Hand = GameObject.Find("mixamorig:LeftHand").transform;
+        transform.SetParent(Hand);
+        rb.isKinematic = true;
+=======
         rb.isKinematic = true;
 
         while (Vector3.Distance(transform.position, PitchforkStartPosition) > 0.5f)
@@ -84,10 +86,11 @@ public class PitchforkBehavior : MonoBehaviour
 
         //rb.isKinematic = false;
         //rb.linearVelocity = Vector3.zero;
-        Transform Hand = GameObject.Find("mixamorig:RightHand").transform;
-        transform.SetParent(Hand);
+        //Transform Hand = GameObject.Find("mixamorig:RightHand").transform;
+        transform.SetParent(WitchHand);
         transform.localPosition = LocalPitchforkPosition;
         transform.localRotation = LocalPitchforkRotation;
         HasReturned = true;
+>>>>>>> Stashed changes
     }
 }

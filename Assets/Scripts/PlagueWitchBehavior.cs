@@ -19,9 +19,6 @@ public class PlagueWitchBehavior : MonoBehaviour
     [SerializeField]
     PitchforkBehavior Pitchfork;
 
-    [SerializeField]
-    Transform WitchMesh;
-
     float AttackCooldown = 1f;
     bool CanAttack = true;
 
@@ -38,13 +35,16 @@ public class PlagueWitchBehavior : MonoBehaviour
     [SerializeField]
     float TurnSpeed = 0.1f;
 
+<<<<<<< Updated upstream
+=======
     AttackType CurrentAttack;
 
     public bool LockRotation = false;
+    
 
+>>>>>>> Stashed changes
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
 
     public enum AttackType
     {
@@ -62,63 +62,51 @@ public class PlagueWitchBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((CanAttack == true) && (Vector3.Dot(transform.forward, PlayerDirection) >= 0.99))
+        if (CanAttack)
         {
-            CanAttack = false;
-            //CurrentAttack = (AttackType)Random.Range(0, 2);
             StartCoroutine(AttackCooldownTimer());
         }
-        if(!LockRotation)
+        if(rb.linearVelocity == Vector3.zero)
         {
-            RotateWitch();
+            PlayerDirection = PlayerTarget.position - transform.position;
+            PlayerDirection.y = 0f;
+            Quaternion PlayerRotation = Quaternion.LookRotation(PlayerDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, PlayerRotation, TurnSpeed * Time.deltaTime);
         }
 
         Distance = Vector3.Distance(Agent.transform.position, PlayerTarget.position);
         Agent.destination = PlayerTarget.position;
-        animator.SetFloat("Speed", Agent.velocity.magnitude);
     }
 
     private IEnumerator AttackCooldownTimer()
     {
-
-       
-        //CurrentAttack = (AttackType)Random.Range(0, 2);
-        CurrentAttack = AttackType.Thrust;
-
+        CanAttack = false;
+        AttackType CurrentAttack = (AttackType)Random.Range(0, 2);
         switch (CurrentAttack)
         {
             case AttackType.Thrust:
-                Pitchfork.HasReturned = false;
-                Agent.isStopped = true;
                 animator.SetTrigger("Thrust Attack");
-
-                while (!Pitchfork.HasReturned)
-                {
-                    yield return null;
-                }
-                LockRotation = false;
-                Agent.isStopped = false;
-                animator.SetTrigger("ThrowDone");
-                DisableHitbox();
+                Pitchfork.ThrowPitchfork();
                 break;
             case AttackType.Swipe:
                 animator.SetTrigger("Swipe Attack");
                 break;
         }
 
-        while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f ) {
-            //Agent.velocity = new Vector3(0, 0, 0);
-            Agent.isStopped = true;
+<<<<<<< Updated upstream
+        while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f) {
+            Agent.velocity = new Vector3(0, 0, 0);
             yield return null;
         }
+=======
+        //while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f ) {
+            //Agent.velocity = new Vector3(0, 0, 0);
+            //Agent.isStopped = true;
+            //yield return null;
+        //}
         Agent.isStopped = false;
+>>>>>>> Stashed changes
         yield return new WaitForSeconds(AttackCooldown);
-
-
-        //To make sure witch doesn't gradually lose her position over time
-        WitchMesh.localPosition = Vector3.zero;
-        WitchMesh.localRotation = Quaternion.identity;
-
         CanAttack = true;
     }
 
@@ -129,16 +117,6 @@ public class PlagueWitchBehavior : MonoBehaviour
     public void DisableHitbox()
     {
         DamageHitboxPitchfork.SetActive(false);
-    }
-
-
-    private void RotateWitch()
-    {
-        PlayerDirection = PlayerTarget.position - transform.position;
-        PlayerDirection.y = 0f;
-        PlayerDirection.Normalize();
-        Quaternion PlayerRotation = Quaternion.LookRotation(PlayerDirection);
-        transform.rotation = Quaternion.Slerp(transform.rotation, PlayerRotation, TurnSpeed * Time.deltaTime);
     }
 
 }
