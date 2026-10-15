@@ -20,14 +20,15 @@ public class PitchforkBehavior : MonoBehaviour
     [SerializeField]
     float PitchforkSpeed = 20.0f;
     [SerializeField]
-    float PitchforkFlightTime = 3.0f;
+    float PitchforkFlightTime = 1.0f;
 
     public bool HasReturned = true;
 
     Vector3 PitchforkStartPosition;
     Vector3 LocalPitchforkPosition;
     Quaternion LocalPitchforkRotation;
-    float AimHeight = 0.2f;
+    float AimHeight = 1f;
+
 
     void Start()
     {
@@ -53,16 +54,11 @@ public class PitchforkBehavior : MonoBehaviour
         PitchforkStartPosition = transform.position;
         transform.SetParent(null);
         rb.isKinematic = false;
-        //Direction = transform.forward;
-        //Direction = (Player.position - transform.position);
-        //Direction = Witch.forward;
-        //Direction = new Vector3(Witch.forward.x, Player.position.y - transform.position.y, Witch.forward.z);
-        //Direction.y = 0;
 
-        float YDistance = Player.position.y - transform.position.y;
+        float YDistance = (Player.position.y + AimHeight) - transform.position.y;
         float XZDistance = Vector3.Distance(new Vector3(Player.position.x, 0, Player.position.z), new Vector3(transform.position.x, 0, transform.position.z));
         float Ratio = YDistance / XZDistance;
-        Direction = new Vector3(Witch.forward.x, Ratio + AimHeight, Witch.forward.z);
+        Direction = new Vector3(Witch.forward.x, Ratio, Witch.forward.z);
 
 
 
@@ -72,8 +68,8 @@ public class PitchforkBehavior : MonoBehaviour
 
         rb.linearVelocity = Direction * PitchforkSpeed;
         yield return new WaitForSeconds(PitchforkFlightTime);
-        //rb.isKinematic = false;
-        //rb.linearVelocity = -Direction * PitchforkSpeed;
+        rb.isKinematic = false;
+
         rb.linearVelocity = Vector3.zero;
         rb.isKinematic = true;
 
@@ -84,12 +80,19 @@ public class PitchforkBehavior : MonoBehaviour
         }
         transform.position = PitchforkStartPosition;
 
-        //rb.isKinematic = false;
-        //rb.linearVelocity = Vector3.zero;
-        //Transform Hand = GameObject.Find("mixamorig:RightHand").transform;
         transform.SetParent(WitchHand);
         transform.localPosition = LocalPitchforkPosition;
         transform.localRotation = LocalPitchforkRotation;
         HasReturned = true;
+    }
+
+    void OnTriggerEnter(Collider Other)
+    {
+        if (Other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            Debug.Log("Pitchfork hit the ground");
+            rb.linearVelocity = Vector3.zero; 
+            rb.isKinematic = true;
+        }
     }
 }
