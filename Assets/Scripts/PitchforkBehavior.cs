@@ -71,6 +71,7 @@ public class PitchforkBehavior : MonoBehaviour
         rb.isKinematic = false;
 
         rb.linearVelocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.isKinematic = true;
 
         while (Vector3.Distance(transform.position, PitchforkStartPosition) > 0.5f)
@@ -90,9 +91,11 @@ public class PitchforkBehavior : MonoBehaviour
     {
         if (Other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            if (!HasReturned) { 
             Debug.Log("Pitchfork hit the ground");
-            rb.linearVelocity = Vector3.zero; 
+            rb.linearVelocity = Vector3.zero;
             rb.isKinematic = true;
+        }
         }
     }
 }

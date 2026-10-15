@@ -62,15 +62,15 @@ public class PlagueWitchBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!LockRotation)
+        {
+            RotateWitch();
+        }
         if ((CanAttack == true) && (Vector3.Dot(transform.forward, PlayerDirection) >= 0.99))
         {
             CanAttack = false;
             CurrentAttack = (AttackType)Random.Range(0, 2);
             StartCoroutine(AttackCooldownTimer());
-        }
-        if(!LockRotation)
-        {
-            RotateWitch();
         }
 
         Distance = Vector3.Distance(Agent.transform.position, PlayerTarget.position);
@@ -82,8 +82,8 @@ public class PlagueWitchBehavior : MonoBehaviour
     {
 
        
-        //CurrentAttack = (AttackType)Random.Range(0, 2);
-        CurrentAttack = AttackType.Thrust;
+        CurrentAttack = (AttackType)Random.Range(0, 2);
+        //CurrentAttack = AttackType.Swipe;
 
         switch (CurrentAttack)
         {
@@ -102,7 +102,15 @@ public class PlagueWitchBehavior : MonoBehaviour
                 DisableHitbox();
                 break;
             case AttackType.Swipe:
+                Agent.isStopped = true;
                 animator.SetTrigger("Swipe Attack");
+                while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+                {
+                    yield return null;
+                }
+                Debug.Log("Swipe Attack Finished");
+                Agent.isStopped = false;
+                LockRotation = false;
                 break;
         }
 
@@ -119,6 +127,7 @@ public class PlagueWitchBehavior : MonoBehaviour
         WitchMesh.localPosition = Vector3.zero;
         WitchMesh.localRotation = Quaternion.identity;
 
+        Debug.Log("Witch can Attack again");
         CanAttack = true;
     }
 

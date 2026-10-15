@@ -23,7 +23,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private void OnTriggerEnter(Collider Other)
     {
 
-        Debug.Log("You have been hit");
+        //Debug.Log("You have been hit");
         Player Player = Other.GetComponent<Player>();
         HealthBehavior Health = Other.GetComponent<HealthBehavior>();
       

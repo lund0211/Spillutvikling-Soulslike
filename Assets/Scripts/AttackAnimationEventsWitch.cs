@@ -32,4 +32,9 @@ public class AttackAnimationEvents : MonoBehaviour
     {
         Witch.LockRotation = true;
     }
+
+    public void UnlockRotationFunc()
+    {
+        Witch.LockRotation = false;
+    }
 }
