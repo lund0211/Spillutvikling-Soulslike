@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
     Vector3 DodgeDirection;
     
 
+    bool IsAttacking = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -97,6 +99,26 @@ public class Player : MonoBehaviour
         
     }
 
+    public void OnAttack(InputAction.CallbackContext Context)
+    {
+        if (Context.started && !IsAttacking)
+        {
+            IsAttacking = true;
+            animator.SetTrigger("Attack");
+            StartCoroutine(AttackTimer());
+        }
+    }
+
+    private IEnumerator AttackTimer()
+    {
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        {
+            yield return null;
+        }
+        IsAttacking = false;
+        Debug.Log("Attack Finished");
+    }
+
     private IEnumerator DodgeTimer()
     {
 
@@ -121,7 +143,11 @@ public class Player : MonoBehaviour
 
     void MovementFunc()
     {
-
+        if(IsAttacking == true)
+        {
+            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+            return;
+        }
         Vector3 Forward = Camera.main.transform.forward;
         Vector3 Right = Camera.main.transform.right;
 
