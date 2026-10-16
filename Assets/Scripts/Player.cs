@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     //private float JumpHeight = 200f;
 
     [SerializeField]
+    GameObject WeaponHitBox;
+
+    [SerializeField]
     private float MovementSpeed = 1f;
     [SerializeField]
     private float MovementRunSpeed = 10f;
@@ -111,6 +114,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator AttackTimer()
     {
+        
         while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
         {
             yield return null;
@@ -198,5 +202,14 @@ public class Player : MonoBehaviour
     {
         MovementFunc();
         animator.SetFloat("Speed", Movement.magnitude);
+    }
+
+    public void EnableHitbox()
+    {
+        WeaponHitBox.SetActive(true);
+    }
+    public void DisableHitbox()
+    {
+        WeaponHitBox.SetActive(true);
     }
 }

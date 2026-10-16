@@ -35,6 +35,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 Health.AdjustHealthBy(-Damage);
             }
         }
+        else
+        {  
+            if(Health != null) { 
+                Health.AdjustHealthBy(-Damage); 
+            }
+        }
     }
 
 }

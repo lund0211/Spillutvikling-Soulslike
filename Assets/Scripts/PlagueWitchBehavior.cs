@@ -81,9 +81,13 @@ public class PlagueWitchBehavior : MonoBehaviour
     private IEnumerator AttackCooldownTimer()
     {
 
-       
-        CurrentAttack = (AttackType)Random.Range(0, 2);
-        //CurrentAttack = AttackType.Swipe;
+        if (Distance < 3f)
+        {
+            CurrentAttack = (AttackType)Random.Range(0, 2);
+        } else
+        {
+            CurrentAttack = AttackType.Thrust;
+        }
 
         switch (CurrentAttack)
         {
