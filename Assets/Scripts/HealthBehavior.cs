@@ -8,6 +8,8 @@ public class HealthBehavior : MonoBehaviour
     private float MaxHealth = 100;
     [SerializeField]
     public float CurrentHealth;
+    [SerializeField]
+    private DeathScreenManager deathScreenManager;
 
 
 
@@ -27,24 +29,34 @@ public class HealthBehavior : MonoBehaviour
 
     public void AdjustHealthBy(float Amount)
     {
+        if (CurrentHealth <= 0 && Amount < 0)
+        {
+            return;
+        }
+        
         CurrentHealth += Amount;
 
         if (CurrentHealth > MaxHealth)
         {
             CurrentHealth = MaxHealth;
         }
-        else if (CurrentHealth < 0)
+        else if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
             Debug.Log("You have died");
-        }
 
+            if (deathScreenManager != null)
+            {
+                deathScreenManager.ShowDeathScreen();
+            }
+        }
     }
 
     public float GetHealth()
     {
         return CurrentHealth;
     }
+
 
     public float GetMaxHealth()
     {

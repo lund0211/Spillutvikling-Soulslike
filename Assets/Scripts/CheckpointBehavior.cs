@@ -7,6 +7,7 @@ public class CheckpointBehavior : MonoBehaviour
     private CheckpointManager checkpointManager;
 
     private bool playerNearby = false;
+    private HealthBehavior playerHealth;
 
     // detects when the player enters the checkpoint area
     private void OnTriggerEnter(Collider other)
@@ -16,6 +17,8 @@ public class CheckpointBehavior : MonoBehaviour
         if (player != null )
         {
             playerNearby = true;
+            playerHealth = player.GetComponent<HealthBehavior>();  //finds the health-system the player have
+
             Debug.Log("Press E to activate checkpoint");
         }
     }
@@ -38,6 +41,14 @@ public class CheckpointBehavior : MonoBehaviour
         {
             //saves the position of the activated checkpoint
             checkpointManager.SetCheckpoint(transform.position);
+
+            // restores the player's health to maximum
+            if (playerHealth != null)
+            {
+                float missingHealth = playerHealth.GetMaxHealth() - playerHealth.GetHealth();
+                playerHealth.AdjustHealthBy(missingHealth);
+            }
+
             Debug.Log("Checkpoint activated");
         }
     }
