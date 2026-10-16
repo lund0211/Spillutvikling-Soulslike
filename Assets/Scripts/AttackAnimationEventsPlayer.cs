@@ -3,9 +3,11 @@ using UnityEngine;
 public class AttackAnimationEventsPlayer : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    Player PlayerComponent;
     void Start()
     {
-        Player PlayerComponent = GetComponentInParent<Player>();
+        PlayerComponent = GetComponentInParent<Player>();
     }
 
     // Update is called once per frame
@@ -16,6 +18,12 @@ public class AttackAnimationEventsPlayer : MonoBehaviour
 
     public void EnableHitbox()
     {
-
+        PlayerComponent.EnableHitbox();
     }
+    public void DisableHitbox()
+    {
+        PlayerComponent.DisableHitbox();
+    }
+
+
 }

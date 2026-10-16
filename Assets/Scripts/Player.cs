@@ -106,21 +106,26 @@ public class Player : MonoBehaviour
     {
         if (Context.started && !IsAttacking)
         {
-            IsAttacking = true;
-            animator.SetTrigger("Attack");
             StartCoroutine(AttackTimer());
         }
     }
 
-    private IEnumerator AttackTimer()
+    private IEnumerator AttackTimer() { 
     {
-        
-        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        animator.SetTrigger("Attack"); 
+        IsAttacking = true;
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack"))
         {
             yield return null;
         }
-        IsAttacking = false;
-        Debug.Log("Attack Finished");
+          
+            while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+            {
+                yield return null;
+            }
+            IsAttacking = false;
+            Debug.Log("Attack Finished");
+        }
     }
 
     private IEnumerator DodgeTimer()
@@ -210,6 +215,6 @@ public class Player : MonoBehaviour
     }
     public void DisableHitbox()
     {
-        WeaponHitBox.SetActive(true);
+        WeaponHitBox.SetActive(false);
     }
 }
