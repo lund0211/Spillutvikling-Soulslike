@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
@@ -6,12 +7,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     [SerializeField]
     float Damage = 10;
-
+    
+    public GameObject owner;
 
 
     void Start()
     {
-        
+        owner = transform.root.gameObject;
     }
 
     // Update is called once per frame
@@ -22,6 +24,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider Other)
     {
+
+        if (owner != null && Other.transform.root == owner.transform.root)
+            return;
 
         //Debug.Log("You have been hit");
         Player Player = Other.GetComponent<Player>();
