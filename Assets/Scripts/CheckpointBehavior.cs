@@ -6,6 +6,9 @@ public class CheckpointBehavior : MonoBehaviour
     [SerializeField]
     private CheckpointManager checkpointManager;
 
+    [SerializeField]
+    private Transform respawnPoint;
+
     private bool playerNearby = false;
     private HealthBehavior playerHealth;
 
@@ -40,7 +43,7 @@ public class CheckpointBehavior : MonoBehaviour
             Keyboard.current.eKey.wasPressedThisFrame)
         {
             //saves the position of the activated checkpoint
-            checkpointManager.SetCheckpoint(transform.position);
+            checkpointManager.SetCheckpoint(respawnPoint.position);
 
             // restores the player's health to maximum
             if (playerHealth != null)
