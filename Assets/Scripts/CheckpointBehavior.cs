@@ -16,17 +16,18 @@ public class CheckpointBehavior : MonoBehaviour
     private HealthBehavior playerHealth;
 
     bool isActivated = false;
+    bool IsSitting = false;
     [SerializeField]
     Animator animator;
 
-    //[SerializeField]
-    //Transform Player;
+    [SerializeField]
+    Transform Player;
 
-    //private Rigidbody PlayerRB;
+    private Rigidbody PlayerRB;
 
     private void Awake()
     {
-        //PlayerRB = Player.GetComponent<Rigidbody>();
+        PlayerRB = Player.GetComponent<Rigidbody>();
     }
 
     // detects when the player enters the checkpoint area
@@ -69,6 +70,7 @@ public class CheckpointBehavior : MonoBehaviour
             //saves the position of the activated checkpoint
             checkpointManager.SetCheckpoint(respawnPoint.position);
             animator.SetTrigger("Sitting");
+            IsSitting = !IsSitting;
 
             // restores the player's health to maximum
             if (playerHealth != null)
@@ -79,6 +81,10 @@ public class CheckpointBehavior : MonoBehaviour
 
      
 
+        }
+        if (IsSitting)
+        {
+            PlayerRB.linearVelocity = Vector3.zero;
         }
     }
 }
