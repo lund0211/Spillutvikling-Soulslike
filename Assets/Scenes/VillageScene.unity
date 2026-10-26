@@ -246,43 +246,6 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
---- !u!84 &29893607
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: WaterDepthMap
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 6
-  m_Width: 1024
-  m_Height: 1024
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_UseDynamicScaleExplicit: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &33786855
 GameObject:
   m_ObjectHideFlags: 0
@@ -8985,7 +8948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1086682452
 Transform:
   m_ObjectHideFlags: 0
@@ -11107,6 +11070,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1987614314608195754, guid: 479a4573d28ea7d41a96a8d2e3225a31, type: 3}
   m_PrefabInstance: {fileID: 587649353}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1497018358 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1945978240180103696, guid: 4339601ba0c065f4fb4a715354c1b12f, type: 3}
+  m_PrefabInstance: {fileID: 9073063305857139308}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1499936055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12078,6 +12046,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 738dad78b2f57ed4198d7743f0b5808d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackAnimationEventsPlayer
+--- !u!95 &1670852190 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 16d60cf67a73901419b8ff84de717b02, type: 3}
+  m_PrefabInstance: {fileID: 1986914466}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1676694187
 GameObject:
   m_ObjectHideFlags: 0
@@ -15998,9 +15971,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1429191495032358874, guid: 4339601ba0c065f4fb4a715354c1b12f, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1670852190}
+    - target: {fileID: 1429191495032358874, guid: 4339601ba0c065f4fb4a715354c1b12f, type: 3}
+      propertyPath: FireAnimation
+      value: 
+      objectReference: {fileID: 1497018358}
+    - target: {fileID: 1429191495032358874, guid: 4339601ba0c065f4fb4a715354c1b12f, type: 3}
       propertyPath: checkpointManager
       value: 
       objectReference: {fileID: 575749634}
+    - target: {fileID: 1945978240180103696, guid: 4339601ba0c065f4fb4a715354c1b12f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3829186616309352274, guid: 4339601ba0c065f4fb4a715354c1b12f, type: 3}
       propertyPath: m_Name
       value: Checkpoint

@@ -9,8 +9,25 @@ public class CheckpointBehavior : MonoBehaviour
     [SerializeField]
     private Transform respawnPoint;
 
+    [SerializeField]
+    public GameObject FireAnimation;
+
     private bool playerNearby = false;
     private HealthBehavior playerHealth;
+
+    bool isActivated = false;
+    [SerializeField]
+    Animator animator;
+
+    //[SerializeField]
+    //Transform Player;
+
+    //private Rigidbody PlayerRB;
+
+    private void Awake()
+    {
+        //PlayerRB = Player.GetComponent<Rigidbody>();
+    }
 
     // detects when the player enters the checkpoint area
     private void OnTriggerEnter(Collider other)
@@ -42,8 +59,16 @@ public class CheckpointBehavior : MonoBehaviour
         if (playerNearby && Keyboard.current != null &&
             Keyboard.current.eKey.wasPressedThisFrame)
         {
+            if (isActivated == false)
+            {
+                isActivated = true;
+                Debug.Log("Checkpoint activated");
+                FireAnimation.SetActive(true);
+                return;
+            }
             //saves the position of the activated checkpoint
             checkpointManager.SetCheckpoint(respawnPoint.position);
+            animator.SetTrigger("Sitting");
 
             // restores the player's health to maximum
             if (playerHealth != null)
@@ -52,7 +77,8 @@ public class CheckpointBehavior : MonoBehaviour
                 playerHealth.AdjustHealthBy(missingHealth);
             }
 
-            Debug.Log("Checkpoint activated");
+     
+
         }
     }
 }
