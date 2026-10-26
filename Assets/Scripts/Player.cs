@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     
 
     bool IsAttacking = false;
+    bool DisableMovement = false;
 
     private void Awake()
     {
@@ -152,7 +153,7 @@ public class Player : MonoBehaviour
 
     void MovementFunc()
     {
-        if(IsAttacking == true)
+        if(IsAttacking == true || DisableMovement == true)
         {
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
             return;
@@ -216,6 +217,16 @@ public class Player : MonoBehaviour
     public void DisableHitbox()
     {
         WeaponHitBox.SetActive(false);
+    }
+
+    public void DisableMovementFunc()
+    {
+        DisableMovement = true;
+    }
+
+    public void EnableMovementFunc()
+    {
+        DisableMovement = false;
     }
 
 }

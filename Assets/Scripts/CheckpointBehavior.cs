@@ -16,7 +16,6 @@ public class CheckpointBehavior : MonoBehaviour
     private HealthBehavior playerHealth;
 
     bool isActivated = false;
-    bool IsSitting = false;
     [SerializeField]
     Animator animator;
 
@@ -57,6 +56,15 @@ public class CheckpointBehavior : MonoBehaviour
     // checks if the player is nearby and presses E to activate the checkpoint
     private void Update()
     {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo stateInfoNext = animator.GetNextAnimatorStateInfo(0);
+
+        if (animator.IsInTransition(0) || (!stateInfo.IsName("Idle") && !stateInfo.IsName("Sitting idle")))
+        {
+            animator.ResetTrigger("Sitting");
+            return;
+        }
+
         if (playerNearby && Keyboard.current != null &&
             Keyboard.current.eKey.wasPressedThisFrame)
         {
@@ -70,7 +78,6 @@ public class CheckpointBehavior : MonoBehaviour
             //saves the position of the activated checkpoint
             checkpointManager.SetCheckpoint(respawnPoint.position);
             animator.SetTrigger("Sitting");
-            IsSitting = !IsSitting;
 
             // restores the player's health to maximum
             if (playerHealth != null)
@@ -79,12 +86,7 @@ public class CheckpointBehavior : MonoBehaviour
                 playerHealth.AdjustHealthBy(missingHealth);
             }
 
-     
 
-        }
-        if (IsSitting)
-        {
-            PlayerRB.linearVelocity = Vector3.zero;
         }
     }
 }

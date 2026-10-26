@@ -25,5 +25,15 @@ public class AttackAnimationEventsPlayer : MonoBehaviour
         PlayerComponent.DisableHitbox();
     }
 
+    public void DisableMovementFunc()
+    {
+        PlayerComponent.DisableMovementFunc();
+    }
+
+    public void EnableMovementFunc()
+    {
+        PlayerComponent.EnableMovementFunc();
+    }
+
 
 }
