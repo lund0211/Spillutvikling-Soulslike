@@ -16,6 +16,8 @@ public class AttackAnimationEventsPlayer : MonoBehaviour
         
     }
 
+
+
     public void EnableHitbox()
     {
         PlayerComponent.EnableHitbox();

@@ -16,6 +16,10 @@ public class PlagueWitchBehavior : MonoBehaviour
 
     [SerializeField]
     GameObject DamageHitboxPitchfork;
+
+    [SerializeField]
+    GameObject DamageHitboxBroom;
+
     [SerializeField]
     PitchforkBehavior Pitchfork;
 
@@ -42,6 +46,8 @@ public class PlagueWitchBehavior : MonoBehaviour
 
     public bool LockRotation = false;
 
+    HealthBehavior health;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -57,6 +63,7 @@ public class PlagueWitchBehavior : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         Agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        health = GetComponent<HealthBehavior>();
     }
 
     // Update is called once per frame
@@ -76,6 +83,13 @@ public class PlagueWitchBehavior : MonoBehaviour
         Distance = Vector3.Distance(Agent.transform.position, PlayerTarget.position);
         Agent.destination = PlayerTarget.position;
         animator.SetFloat("Speed", Agent.velocity.magnitude);
+
+        if (health != null && health.Dead)
+        {
+            Agent.isStopped = true;
+            animator.SetBool("Dead", true);
+            return;
+        }
     }
 
     private IEnumerator AttackCooldownTimer()
@@ -103,7 +117,7 @@ public class PlagueWitchBehavior : MonoBehaviour
                 LockRotation = false;
                 Agent.isStopped = false;
                 animator.SetTrigger("ThrowDone");
-                DisableHitbox();
+                DisableHitboxPitchfork();
                 break;
             case AttackType.Swipe:
                 Agent.isStopped = true;
@@ -135,13 +149,23 @@ public class PlagueWitchBehavior : MonoBehaviour
         CanAttack = true;
     }
 
-    public void EnableHitbox()
+    public void EnableHitboxPitchfork()
     {
         DamageHitboxPitchfork.SetActive(true);
     }
-    public void DisableHitbox()
+    public void DisableHitboxPitchfork()
     {
         DamageHitboxPitchfork.SetActive(false);
+    }
+
+    public void EnableHitboxBroom()
+    {
+        DamageHitboxBroom.SetActive(true);
+    }
+
+    public void DisableHitboxBroom()
+    {
+        DamageHitboxBroom.SetActive(false);
     }
 
 

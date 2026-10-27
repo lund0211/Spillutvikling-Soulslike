@@ -14,6 +14,8 @@ public class PitchforkBehavior : MonoBehaviour
     [SerializeField]
     Transform WitchHand;
 
+    [SerializeField]
+    GameObject Hitbox;
 
     Vector3 Direction;
 
@@ -35,6 +37,8 @@ public class PitchforkBehavior : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         LocalPitchforkPosition = transform.localPosition;
         LocalPitchforkRotation = transform.localRotation;
+
+        Physics.IgnoreCollision(Hitbox.GetComponent<Collider>(), Witch.GetComponent<Collider>());
     }
 
     // Update is called once per frame

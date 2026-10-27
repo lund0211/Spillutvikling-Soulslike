@@ -14,14 +14,24 @@ public class AttackAnimationEvents : MonoBehaviour
 
     }
 
-    public void EnableHitbox()
+    public void EnableHitboxPitchfork()
     {
-        Witch.EnableHitbox();
+        Witch.EnableHitboxPitchfork();
     }
 
-    public void DisableHitbox()
+    public void DisableHitboxPitchfork()
     {
-        Witch.DisableHitbox();
+        Witch.DisableHitboxPitchfork();
+    }
+
+    public void EnableHitboxBroom()
+    {
+        Witch.EnableHitboxBroom();
+    }
+
+    public void DisableHitboxBroom()
+    {
+        Witch.DisableHitboxBroom();
     }
     public void ThrowPitchfork()
     {

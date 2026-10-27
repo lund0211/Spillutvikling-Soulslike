@@ -10,6 +10,7 @@ public class HealthBehavior : MonoBehaviour
     public float CurrentHealth;
     [SerializeField]
     private DeathScreenManager deathScreenManager;
+    public bool Dead = false;
 
 
 
@@ -44,6 +45,7 @@ public class HealthBehavior : MonoBehaviour
         {
             CurrentHealth = 0;
             Debug.Log("You have died");
+            Dead = true;
 
             if (deathScreenManager != null)
             {

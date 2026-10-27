@@ -57,7 +57,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.1369697
-        functionName: EnableHitbox
+        functionName: EnableHitboxPitchfork
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.13707836
+        functionName: ThrowPitchfork
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -65,13 +72,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.13818182
         functionName: LockRotationFunc
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.139488
-        functionName: ThrowPitchfork
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
