@@ -48,6 +48,8 @@ public class PlagueWitchBehavior : MonoBehaviour
 
     HealthBehavior health;
 
+    EnemyRespawnBehavior RespawnBehavior;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -64,11 +66,21 @@ public class PlagueWitchBehavior : MonoBehaviour
         Agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         health = GetComponent<HealthBehavior>();
+        RespawnBehavior = GetComponent<EnemyRespawnBehavior>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        Distance = Vector3.Distance(Agent.transform.position, PlayerTarget.position);
+        if(Distance > 50)
+        {
+            LoseAggro();
+            return;
+        }
+
+        Agent.destination = PlayerTarget.position;
         if (!LockRotation)
         {
             RotateWitch();
@@ -80,14 +92,16 @@ public class PlagueWitchBehavior : MonoBehaviour
             StartCoroutine(AttackCooldownTimer());
         }
 
-        Distance = Vector3.Distance(Agent.transform.position, PlayerTarget.position);
-        Agent.destination = PlayerTarget.position;
+        
+        
+        
         animator.SetFloat("Speed", Agent.velocity.magnitude);
 
         if (health != null && health.Dead)
         {
             Agent.isStopped = true;
             animator.SetBool("Dead", true);
+            RespawnBehavior.IsDead();
             return;
         }
     }
@@ -176,6 +190,16 @@ public class PlagueWitchBehavior : MonoBehaviour
         PlayerDirection.Normalize();
         Quaternion PlayerRotation = Quaternion.LookRotation(PlayerDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, PlayerRotation, TurnSpeed * Time.deltaTime);
+    }
+
+    private void LoseAggro()
+    {
+        Agent.isStopped = true;
+        Agent.ResetPath();
+        LockRotation = false;
+        CanAttack = true;
+        DisableHitboxPitchfork();
+        DisableHitboxBroom();
     }
 
 }

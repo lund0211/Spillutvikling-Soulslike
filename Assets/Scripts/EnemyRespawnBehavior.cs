@@ -45,7 +45,10 @@ public class EnemyRespawnBehavior : MonoBehaviour
         transform.SetPositionAndRotation(StartPosition, StartRotation);
         agent.Warp(StartPosition);
         Health.CurrentHealth = Health.GetMaxHealth();
-        EnemyBehavior.ResetChase();
+        if (EnemyBehavior != null)
+        {
+            EnemyBehavior.ResetChase();
+        }
         EnemyIsDead = false;
     }
 
