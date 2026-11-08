@@ -24,6 +24,8 @@ public class CheckpointBehavior : MonoBehaviour
 
     private Rigidbody PlayerRB;
 
+    EnemyRespawnBehavior[] Enemies;
+
     private void Awake()
     {
         PlayerRB = Player.GetComponent<Rigidbody>();
@@ -78,6 +80,7 @@ public class CheckpointBehavior : MonoBehaviour
             //saves the position of the activated checkpoint
             checkpointManager.SetCheckpoint(respawnPoint.position);
             animator.SetTrigger("Sitting");
+            RespawnAllEnemies();
 
             // restores the player's health to maximum
             if (playerHealth != null)
@@ -87,6 +90,19 @@ public class CheckpointBehavior : MonoBehaviour
             }
 
 
+        }
+    }
+
+    public void RespawnAllEnemies()
+    {
+        Enemies = FindObjectsByType<EnemyRespawnBehavior>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        
+        foreach(EnemyRespawnBehavior Enemy in Enemies)
+        {
+            if(Enemy != null)
+            {
+                Enemy.Respawn();
+            }
         }
     }
 }
