@@ -15,7 +15,13 @@ public class NormalEnemyBehavior : MonoBehaviour
     GameObject Player;
 
     [SerializeField]
-    GameObject Hitbox;
+    GameObject HitboxSword;
+
+    [SerializeField]
+    GameObject HitboxLeg;
+
+    HealthBehavior Health;
+
 
     bool PlayerBeingChased = false;
 
@@ -23,10 +29,20 @@ public class NormalEnemyBehavior : MonoBehaviour
 
     bool CanAttack = true;
 
+    public enum AttackType
+    {
+        SwordAttack,
+        KickAttack
+
+    }
+
+    AttackType CurrentAttack;
+
     void Start()
     {
         Agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        Health = GetComponent<HealthBehavior>();
     }
 
     // Update is called once per frame
@@ -44,14 +60,33 @@ public class NormalEnemyBehavior : MonoBehaviour
         if(Vector3.Distance(Agent.transform.position, Player.transform.position) < 2f && CanAttack)
         {
             CanAttack = false;
-            animator.SetTrigger("Attack Sword");
+            CurrentAttack = (AttackType)Random.Range(0, 2);
+            switch(CurrentAttack)
+            {
+                case AttackType.SwordAttack:
+                    animator.SetTrigger("Attack Sword");
+                    break;
+                case AttackType.KickAttack:
+                    animator.SetTrigger("Attack Kick");
+                    break;
+                }
             StartCoroutine(AttackCooldownTimer());
+        }
+
+        if(Health.CurrentHealth <= 0 )
+        {
+            animator.SetBool("Dead", true);
+            DisableHitboxSword();
+        }
+        else
+        {
+            animator.SetBool("Dead", false);
         }
     }
 
     private IEnumerator AttackCooldownTimer()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         CanAttack = true;
     }
 
@@ -62,12 +97,22 @@ public class NormalEnemyBehavior : MonoBehaviour
 
     public void EnableHitboxSword()
     {
-        Hitbox.SetActive(true);
+        HitboxSword.SetActive(true);
     }
 
     public void DisableHitboxSword()
     {
-        Hitbox.SetActive(false);
+        HitboxSword.SetActive(false);
+    }
+
+    public void EnableHitboxLeg()
+    {
+        HitboxLeg.SetActive(true);
+    }
+
+    public void DisableHitboxLeg()
+    {
+        HitboxLeg.SetActive(false);
     }
 
     public void ResetChase()
