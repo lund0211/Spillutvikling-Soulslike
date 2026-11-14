@@ -29,6 +29,10 @@ public class NormalEnemyBehavior : MonoBehaviour
 
     bool CanAttack = true;
 
+    Vector3 PlayerDirection;
+
+    float TurnSpeed = 10f;
+
     public enum AttackType
     {
         SwordAttack,
@@ -37,6 +41,8 @@ public class NormalEnemyBehavior : MonoBehaviour
     }
 
     AttackType CurrentAttack;
+
+    bool IsDead = false;
 
     void Start()
     {
@@ -52,12 +58,18 @@ public class NormalEnemyBehavior : MonoBehaviour
         animator.SetFloat("Speed", MovementSpeed);
 
 
-        if (PlayerBeingChased && CanAttack)
+        if (PlayerBeingChased && CanAttack && !IsDead)
         {
             Agent.destination = Player.transform.position;
+            RotateEnemy();
         }
 
-        if(Vector3.Distance(Agent.transform.position, Player.transform.position) < 2f && CanAttack)
+        //Agent.updateRotation = PlayerBeingChased;
+
+        //PlayerDirection = (Player.transform.position - transform.position).normalized;
+        Debug.Log(Vector3.Angle(transform.forward, PlayerDirection));
+
+        if (Vector3.Distance(Agent.transform.position, Player.transform.position) < 1.5f && CanAttack && Vector3.Angle(transform.forward, PlayerDirection) <= 30f)
         {
             CanAttack = false;
             CurrentAttack = (AttackType)Random.Range(0, 2);
@@ -77,10 +89,13 @@ public class NormalEnemyBehavior : MonoBehaviour
         {
             animator.SetBool("Dead", true);
             DisableHitboxSword();
+            DisableHitboxLeg();
+            IsDead = true;
         }
         else
         {
             animator.SetBool("Dead", false);
+            IsDead = false; 
         }
     }
 
@@ -88,6 +103,14 @@ public class NormalEnemyBehavior : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         CanAttack = true;
+    }
+    private void RotateEnemy()
+    {
+        PlayerDirection = Player.transform.position - transform.position;
+        PlayerDirection.y = 0f;
+        PlayerDirection.Normalize();
+        Quaternion PlayerRotation = Quaternion.LookRotation(PlayerDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, PlayerRotation, TurnSpeed * Time.deltaTime);
     }
 
     public void EnablePlayerFollow()

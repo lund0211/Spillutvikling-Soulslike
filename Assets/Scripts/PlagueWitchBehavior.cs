@@ -87,8 +87,8 @@ public class PlagueWitchBehavior : MonoBehaviour
         }
         if ((CanAttack == true) && (Vector3.Dot(transform.forward, PlayerDirection) >= 0.99))
         {
-            CanAttack = false;
-            CurrentAttack = (AttackType)Random.Range(0, 2);
+           CanAttack = false;
+            //CurrentAttack = (AttackType)Random.Range(0, 2);
             StartCoroutine(AttackCooldownTimer());
         }
 

@@ -63,7 +63,9 @@ public class DeathScreenManager : MonoBehaviour
                 playerHealth.AdjustHealthBy(missingHealth);
 
             }
-            // hides the death screen after respawning
+        // hides the death screen after respawning
+
+            RespawnEnemies();
             deathScreenCanvas.SetActive(false);
 
             isRespawning = false;
@@ -73,6 +75,21 @@ public class DeathScreenManager : MonoBehaviour
     private bool isRespawning = false;
 
     private Vector3 startPosition;
+    private void RespawnEnemies()
+    {
+        EnemyRespawnBehavior[] enemies =
+            FindObjectsByType<EnemyRespawnBehavior>(
+                FindObjectsInactive.Include,
+                FindObjectsSortMode.None);
+
+        foreach (EnemyRespawnBehavior enemy in enemies)
+        {
+            enemy.Respawn();
+        }
+    }
+
+
  }
-   
+
+
 
