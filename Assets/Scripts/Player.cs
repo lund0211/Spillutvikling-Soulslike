@@ -122,9 +122,11 @@ public class Player : MonoBehaviour
         {
             if (Health != null)
             {
-                if (HealthPotionCount > 0) { 
+                AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                if (HealthPotionCount > 0 && (stateInfo.IsName("Idle") || stateInfo.IsName("Run") || stateInfo.IsName("Sprint"))) { 
                     Health.AdjustHealthBy(50f);
                     HealthPotionCount--;
+                    animator.SetTrigger("Drinking");
                 }
 
             }
@@ -248,6 +250,11 @@ public class Player : MonoBehaviour
     public void EnableMovementFunc()
     {
         DisableMovement = false;
+    }
+
+    public void RestorePotionCount()
+    {
+        HealthPotionCount = 3;
     }
 
 }

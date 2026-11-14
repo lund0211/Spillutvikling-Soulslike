@@ -8002,7 +8002,7 @@ PrefabInstance:
     - target: {fileID: 1429191495032358874, guid: 4339601ba0c065f4fb4a715354c1b12f, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 1875608469}
+      objectReference: {fileID: 1875608463}
     - target: {fileID: 1429191495032358874, guid: 4339601ba0c065f4fb4a715354c1b12f, type: 3}
       propertyPath: animator
       value: 
@@ -9825,6 +9825,43 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1945978240180103696, guid: 4339601ba0c065f4fb4a715354c1b12f, type: 3}
   m_PrefabInstance: {fileID: 819153208}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &1068985569
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WaterDepthMap
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 6
+  m_Width: 1024
+  m_Height: 1024
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_UseDynamicScaleExplicit: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &1069543643
 GameObject:
   m_ObjectHideFlags: 0
@@ -11258,7 +11295,7 @@ PrefabInstance:
     - target: {fileID: 1429191495032358874, guid: 4339601ba0c065f4fb4a715354c1b12f, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 1875608469}
+      objectReference: {fileID: 1875608463}
     - target: {fileID: 1429191495032358874, guid: 4339601ba0c065f4fb4a715354c1b12f, type: 3}
       propertyPath: animator
       value: 
@@ -18025,7 +18062,7 @@ PrefabInstance:
     - target: {fileID: 1429191495032358874, guid: 4339601ba0c065f4fb4a715354c1b12f, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 1875608469}
+      objectReference: {fileID: 1875608463}
     - target: {fileID: 1429191495032358874, guid: 4339601ba0c065f4fb4a715354c1b12f, type: 3}
       propertyPath: animator
       value: 

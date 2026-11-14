@@ -20,7 +20,9 @@ public class CheckpointBehavior : MonoBehaviour
     Animator animator;
 
     [SerializeField]
-    Transform Player;
+    GameObject Player;
+
+    Player playerBehavior;
 
     private Rigidbody PlayerRB;
 
@@ -29,6 +31,7 @@ public class CheckpointBehavior : MonoBehaviour
     private void Awake()
     {
         PlayerRB = Player.GetComponent<Rigidbody>();
+        playerBehavior = Player.GetComponent<Player>();
     }
 
     // detects when the player enters the checkpoint area
@@ -81,6 +84,7 @@ public class CheckpointBehavior : MonoBehaviour
             checkpointManager.SetCheckpoint(respawnPoint.position);
             animator.SetTrigger("Sitting");
             RespawnAllEnemies();
+            playerBehavior.RestorePotionCount();
 
             // restores the player's health to maximum
             if (playerHealth != null)
