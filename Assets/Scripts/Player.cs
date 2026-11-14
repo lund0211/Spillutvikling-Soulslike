@@ -40,7 +40,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     float DodgeSpeed = 5f;
     Vector3 DodgeDirection;
-    
+
+    HealthBehavior Health;
+
+    int HealthPotionCount = 3;
+
 
     bool IsAttacking = false;
     bool DisableMovement = false;
@@ -49,6 +53,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
+        Health = GetComponent<HealthBehavior>();
     }
     
     /* Unused test function, can be implemented if we want
@@ -108,6 +113,22 @@ public class Player : MonoBehaviour
         if (Context.started && !IsAttacking)
         {
             StartCoroutine(AttackTimer());
+        }
+    }
+
+    public void OnHeal(InputAction.CallbackContext Context)
+    {
+        if (Context.started)
+        {
+            if (Health != null)
+            {
+                if (HealthPotionCount > 0) { 
+                    Health.AdjustHealthBy(50f);
+                    HealthPotionCount--;
+                }
+
+            }
+       
         }
     }
 
