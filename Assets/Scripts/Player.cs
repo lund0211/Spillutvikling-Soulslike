@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
             if (Health != null)
             {
                 AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-                if (HealthPotionCount > 0 && (stateInfo.IsName("Idle") || stateInfo.IsName("Run") || stateInfo.IsName("Sprint"))) { 
+                if (HealthPotionCount > 0 && (stateInfo.IsName("Idle") || stateInfo.IsName("Walking") || stateInfo.IsName("Sprint"))) { 
                     Health.AdjustHealthBy(50f);
                     HealthPotionCount--;
                     animator.SetTrigger("Drinking");
