@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
 
     public void OnSprint(InputAction.CallbackContext Context)
     {
-        if (Context.performed && CurrentStamina >= StaminaSprintCost)
+        if (Context.performed && CurrentStamina > 0)
         {
             IsSprinting = true;
             animator.SetBool("IsSprinting", true);

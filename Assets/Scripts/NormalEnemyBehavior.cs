@@ -22,6 +22,8 @@ public class NormalEnemyBehavior : MonoBehaviour
 
     HealthBehavior Health;
 
+    float attackCooldown = 1f;
+
 
     bool PlayerBeingChased = false;
 
@@ -61,8 +63,12 @@ public class NormalEnemyBehavior : MonoBehaviour
         if (PlayerBeingChased && CanAttack && !IsDead)
         {
             Agent.destination = Player.transform.position;
+        }
+        if(PlayerBeingChased && !IsDead)
+        {
             RotateEnemy();
         }
+ 
 
         //Agent.updateRotation = PlayerBeingChased;
 
@@ -79,6 +85,7 @@ public class NormalEnemyBehavior : MonoBehaviour
                     break;
                 case AttackType.KickAttack:
                     animator.SetTrigger("Attack Kick");
+                    
                     break;
                 }
             StartCoroutine(AttackCooldownTimer());
@@ -100,7 +107,7 @@ public class NormalEnemyBehavior : MonoBehaviour
 
     private IEnumerator AttackCooldownTimer()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(attackCooldown);
         CanAttack = true;
     }
     private void RotateEnemy()
