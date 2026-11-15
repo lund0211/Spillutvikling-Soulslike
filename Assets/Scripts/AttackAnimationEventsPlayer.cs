@@ -37,5 +37,15 @@ public class AttackAnimationEventsPlayer : MonoBehaviour
         PlayerComponent.EnableMovementFunc();
     }
 
+    public void ShowPotionInHand()
+    {
+        PlayerComponent.ShowPotionInHand();
+    }
+
+    public void HidePotionInHand()
+    {
+        PlayerComponent.HidePotionInHand();
+    }
+
 
 }

@@ -45,6 +45,9 @@ public class Player : MonoBehaviour
 
     int HealthPotionCount = 3;
 
+    [SerializeField]
+    GameObject PotionInHand;
+
 
     bool IsAttacking = false;
     bool DisableMovement = false;
@@ -255,6 +258,16 @@ public class Player : MonoBehaviour
     public void RestorePotionCount()
     {
         HealthPotionCount = 3;
+    }
+
+    public void ShowPotionInHand()
+    {
+        PotionInHand.SetActive(true);
+    }
+
+    public void HidePotionInHand()
+    {
+        PotionInHand.SetActive(false);
     }
 
 }
