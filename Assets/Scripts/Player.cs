@@ -52,11 +52,23 @@ public class Player : MonoBehaviour
     bool IsAttacking = false;
     bool DisableMovement = false;
 
+    float MaxStamina = 100f;
+    float CurrentStamina = 0f;
+
+    float StaminaDodgeCost = 20f;
+
+    float StaminaAttackCost = 20f;
+
+    float StaminaSprintCost = 10f;
+
+    bool PauseStaminaRegen = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         Health = GetComponent<HealthBehavior>();
+        //CurrentStamina = MaxStamina;
     }
     
     /* Unused test function, can be implemented if we want
@@ -81,7 +93,7 @@ public class Player : MonoBehaviour
     {
 
 
-        if (Context.performed && CanDodge)
+        if (Context.performed && CanDodge && CurrentStamina >= StaminaDodgeCost)
         {
             if (Movement != Vector3.zero)
             {
@@ -92,13 +104,15 @@ public class Player : MonoBehaviour
                 DodgeDirection = transform.forward;
             }
                 RemainingDodgeSpeedTime = DodgeSpeedTime;
+            StartCoroutine(StaminaRegenPauseTimer());
+            AdjustStamina(-StaminaDodgeCost);
             StartCoroutine(DodgeTimer());
         }
     }
 
     public void OnSprint(InputAction.CallbackContext Context)
     {
-        if (Context.performed)
+        if (Context.performed && CurrentStamina >= StaminaSprintCost)
         {
             IsSprinting = true;
             animator.SetBool("IsSprinting", true);
@@ -107,14 +121,17 @@ public class Player : MonoBehaviour
         {
             IsSprinting = false;
             animator.SetBool("IsSprinting", false);
+            StartCoroutine(StaminaRegenPauseTimer());
         }
         
     }
 
     public void OnAttack(InputAction.CallbackContext Context)
     {
-        if (Context.started && !IsAttacking)
+        if (Context.started && !IsAttacking && CurrentStamina >= StaminaAttackCost)
         {
+            StartCoroutine(StaminaRegenPauseTimer());
+            AdjustStamina(-StaminaAttackCost);
             StartCoroutine(AttackTimer());
         }
     }
@@ -219,13 +236,40 @@ public class Player : MonoBehaviour
             }
         }
 
-        
+        StaminaRegeneration();
+        Debug.Log("Current Stamina: " + CurrentStamina);
 
     }
 
+    public void AdjustStamina(float amount)
+    {
+        CurrentStamina += amount;
+        if(CurrentStamina > MaxStamina)
+        {
+            CurrentStamina = MaxStamina;
+        }
+        else if (CurrentStamina < 0)
+        {
+            CurrentStamina = 0;
+        }
+    }
 
+    public void StaminaRegeneration()
+    {
+        if (CurrentStamina < MaxStamina && !PauseStaminaRegen && IsSprinting == false)
+        {
+            AdjustStamina(20f * Time.deltaTime);
+        }
+    }
 
-    void Update()
+    private IEnumerator StaminaRegenPauseTimer()
+    {
+        PauseStaminaRegen = true;
+        yield return new WaitForSeconds(2f);
+        PauseStaminaRegen = false;
+    }
+
+void Update()
     {
         
     }
@@ -234,6 +278,16 @@ public class Player : MonoBehaviour
     {
         MovementFunc();
         animator.SetFloat("Speed", Movement.magnitude);
+
+        if(IsSprinting == true)
+        {
+            AdjustStamina(-StaminaSprintCost * Time.deltaTime);
+            if(CurrentStamina <= 0)
+            {
+                IsSprinting = false;
+                animator.SetBool("IsSprinting", false);
+            }
+        }
     }
 
     public void EnableHitbox()

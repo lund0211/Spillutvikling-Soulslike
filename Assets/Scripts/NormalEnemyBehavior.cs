@@ -67,7 +67,6 @@ public class NormalEnemyBehavior : MonoBehaviour
         //Agent.updateRotation = PlayerBeingChased;
 
         //PlayerDirection = (Player.transform.position - transform.position).normalized;
-        Debug.Log(Vector3.Angle(transform.forward, PlayerDirection));
 
         if (Vector3.Distance(Agent.transform.position, Player.transform.position) < 1.5f && CanAttack && Vector3.Angle(transform.forward, PlayerDirection) <= 30f)
         {
