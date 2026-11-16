@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         Health = GetComponent<HealthBehavior>();
-        //CurrentStamina = MaxStamina;
+        CurrentStamina = MaxStamina;
     }
     
     /* Unused test function, can be implemented if we want
@@ -287,6 +287,16 @@ void Update()
                 IsSprinting = false;
                 animator.SetBool("IsSprinting", false);
             }
+        }
+        if(Health.CurrentHealth <= 0)
+        {
+            animator.SetBool("Dead", true);
+            DisableHitbox();
+            DisableMovementFunc();
+        }
+        else
+        {
+            animator.SetBool("Dead", false);
         }
     }
 

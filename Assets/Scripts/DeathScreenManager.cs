@@ -8,7 +8,7 @@ public class DeathScreenManager : MonoBehaviour
     private GameObject deathScreenCanvas;
 
     [SerializeField]
-    private Transform player; // gives us access to the player's position
+    private Player player; // gives us access to the player's position
 
     [SerializeField]
     private Rigidbody playerRigidbody;
@@ -67,7 +67,7 @@ public class DeathScreenManager : MonoBehaviour
 
             RespawnEnemies();
             deathScreenCanvas.SetActive(false);
-
+            player.EnableMovementFunc();
             isRespawning = false;
         
 
