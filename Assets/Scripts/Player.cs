@@ -156,7 +156,8 @@ public class Player : MonoBehaviour
 
     private IEnumerator AttackTimer() { 
     {
-        animator.SetTrigger("Attack"); 
+        animator.SetTrigger("Attack");
+        AudioManager.Instance.PlaySwordSound(0.8f, 1f);
         IsAttacking = true;
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack"))
         {
@@ -333,5 +334,6 @@ void Update()
     {
         PotionInHand.SetActive(false);
     }
+    
 
 }

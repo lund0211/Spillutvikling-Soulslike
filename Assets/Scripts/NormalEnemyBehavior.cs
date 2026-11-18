@@ -51,6 +51,8 @@ public class NormalEnemyBehavior : MonoBehaviour
         Agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         Health = GetComponent<HealthBehavior>();
+
+        AudioManager.Instance.PlayZombieSound(0f, 1f);
     }
 
     // Update is called once per frame
