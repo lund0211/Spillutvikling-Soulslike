@@ -9,13 +9,15 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     AudioSource PlayerAudioSource;
     [SerializeField]
-    AudioSource EnemyAudioSource;
-    [SerializeField]
     AudioClip SwordSound;
     [SerializeField]
     AudioClip Walking;
     [SerializeField]
-    AudioClip ZombieNoises;
+    AudioClip DyingSound;
+    [SerializeField]
+    AudioClip HurtSound;
+
+    bool PlayZomebieSounds = false;
 
     public float masterVolume = 1f;
 
@@ -53,19 +55,21 @@ public class AudioManager : MonoBehaviour
     {
         StartCoroutine(DelayPlayedSound(PlayerAudioSource, Walking, delay, audioVolumeMultiplier));
     }
-    public void PlayZombieSound(float delay, float audioVolumeMultiplier)
+    public void PlayDyingSound(float delay, float audioVolumeMultiplier)
     {
-
-
-
-        StartCoroutine(DelayPlayedSound(EnemyAudioSource, ZombieNoises, delay, audioVolumeMultiplier));
-
-
-
+        StartCoroutine(DelayPlayedSound(PlayerAudioSource, DyingSound, delay, audioVolumeMultiplier));
     }
+
+    public void PlayHurtSound(float delay, float audioVolumeMultiplier)
+    {
+        StartCoroutine(DelayPlayedSound(PlayerAudioSource, HurtSound, delay, audioVolumeMultiplier));
+    }
+
     public IEnumerator DelayPlayedSound(AudioSource audioSource, AudioClip clip, float delay, float audioVolumeMultiplier)
     {
         yield return new WaitForSeconds(delay);
         audioSource.PlayOneShot(clip, masterVolume * audioVolumeMultiplier);
     }
+
+
 }

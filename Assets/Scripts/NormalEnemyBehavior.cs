@@ -44,15 +44,13 @@ public class NormalEnemyBehavior : MonoBehaviour
 
     AttackType CurrentAttack;
 
-    bool IsDead = false;
+    public bool IsDead = false;
 
     void Start()
     {
         Agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         Health = GetComponent<HealthBehavior>();
-
-        AudioManager.Instance.PlayZombieSound(0f, 1f);
     }
 
     // Update is called once per frame
