@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour
     AudioClip DyingSound;
     [SerializeField]
     AudioClip HurtSound;
+    [SerializeField]
+    AudioClip DrinkingSound;
 
     bool PlayZomebieSounds = false;
 
@@ -63,6 +65,11 @@ public class AudioManager : MonoBehaviour
     public void PlayHurtSound(float delay, float audioVolumeMultiplier)
     {
         StartCoroutine(DelayPlayedSound(PlayerAudioSource, HurtSound, delay, audioVolumeMultiplier));
+    }
+    
+    public void PlayDrinkingSound(float delay, float audioVolumeMultiplier)
+    {
+        StartCoroutine(DelayPlayedSound(PlayerAudioSource, DrinkingSound, delay, audioVolumeMultiplier));
     }
 
     public IEnumerator DelayPlayedSound(AudioSource audioSource, AudioClip clip, float delay, float audioVolumeMultiplier)

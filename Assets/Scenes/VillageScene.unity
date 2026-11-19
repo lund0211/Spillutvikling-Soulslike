@@ -1623,6 +1623,43 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 11b6c022ca54ae4428be5a16a816c940, type: 3}
   m_PrefabInstance: {fileID: 222224005}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &228627405
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WaterDepthMap
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 6
+  m_Width: 1024
+  m_Height: 1024
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_UseDynamicScaleExplicit: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &235586135
 GameObject:
   m_ObjectHideFlags: 0
@@ -11618,43 +11655,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 82354b7bd166a7649a9d93101303ae5f, type: 3}
   m_PrefabInstance: {fileID: 432205388}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &1295960988
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: WaterDepthMap
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 6
-  m_Width: 1024
-  m_Height: 1024
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_UseDynamicScaleExplicit: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &1298048532
 GameObject:
   m_ObjectHideFlags: 0
@@ -12920,6 +12920,7 @@ MonoBehaviour:
   Walking: {fileID: 8300000, guid: df8b3bc8bc6e56c48886aea89e89ce97, type: 3}
   DyingSound: {fileID: 8300000, guid: 960550e2b422c3f4f9e0376d31cdc4c7, type: 3}
   HurtSound: {fileID: 8300000, guid: 6ab5e2783359d0d4eb446dc630fb75c4, type: 3}
+  DrinkingSound: {fileID: 8300000, guid: 2b792ea56036e5c478eab5b66afe9dd0, type: 3}
   masterVolume: 1
 --- !u!4 &1517579137
 Transform:
