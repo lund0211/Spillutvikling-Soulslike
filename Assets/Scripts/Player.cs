@@ -133,9 +133,13 @@ public class Player : MonoBehaviour
     {
         if (Context.started && !IsAttacking && CurrentStamina >= StaminaAttackCost)
         {
-            StartCoroutine(StaminaRegenPauseTimer());
-            AdjustStamina(-StaminaAttackCost);
-            StartCoroutine(AttackTimer());
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if ((stateInfo.IsName("Idle") || stateInfo.IsName("Walking") || stateInfo.IsName("Sprint")) && (!animator.IsInTransition(0)))
+            {
+                StartCoroutine(StaminaRegenPauseTimer());
+                AdjustStamina(-StaminaAttackCost);
+                StartCoroutine(AttackTimer());
+            }
         }
     }
 
@@ -163,23 +167,20 @@ public class Player : MonoBehaviour
     {
         {
 
-            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsName("Idle") || stateInfo.IsName("Walking") || stateInfo.IsName("Sprint"))
+            animator.SetTrigger("Attack");
+            AudioManager.Instance.PlaySwordSound(0.2f, 1f);
+            IsAttacking = true;
+            while (!animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack"))
             {
-                animator.SetTrigger("Attack");
-                AudioManager.Instance.PlaySwordSound(0.2f, 1f);
-                IsAttacking = true;
-                while (!animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack"))
-                {
-                    yield return null;
-                }
-
-                while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
-                {
-                    yield return null;
-                }
-                IsAttacking = false;
+                yield return null;
             }
+
+            while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+            {
+                yield return null;
+            }
+            IsAttacking = false;
+            
         }
     }
 
