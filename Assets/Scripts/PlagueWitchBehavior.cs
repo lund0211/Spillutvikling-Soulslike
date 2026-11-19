@@ -52,6 +52,7 @@ public class PlagueWitchBehavior : MonoBehaviour
 
     bool PlayedAggroSound = false;
 
+    WitchAudio WitchAudio;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -69,6 +70,7 @@ public class PlagueWitchBehavior : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         health = GetComponent<HealthBehavior>();
         RespawnBehavior = GetComponent<EnemyRespawnBehavior>();
+        WitchAudio = GetComponent<WitchAudio>();
     }
 
     // Update is called once per frame
@@ -87,7 +89,7 @@ public class PlagueWitchBehavior : MonoBehaviour
 
         if(!PlayedAggroSound)
         {
-            GetComponent<WitchAudio>().PlayWitchAggroedSound();
+            WitchAudio.PlayWitchAggroedSound();
             PlayedAggroSound = true;
         }
         if (!LockRotation)
@@ -97,7 +99,6 @@ public class PlagueWitchBehavior : MonoBehaviour
         if ((CanAttack == true) && (Vector3.Dot(transform.forward, PlayerDirection) >= 0.99) && (Distance < 15f))
         {
            CanAttack = false;
-            //CurrentAttack = (AttackType)Random.Range(0, 2);
             StartCoroutine(AttackCooldownTimer());
         }
 
@@ -138,6 +139,7 @@ public class PlagueWitchBehavior : MonoBehaviour
                 Pitchfork.HasReturned = false;
                 Agent.isStopped = true;
                 animator.SetTrigger("Thrust Attack");
+                WitchAudio.PlayWitchThrowGruntSound();
 
                 while (!Pitchfork.HasReturned)
                 {
@@ -151,6 +153,7 @@ public class PlagueWitchBehavior : MonoBehaviour
             case AttackType.Swipe:
                 Agent.isStopped = true;
                 animator.SetTrigger("Swipe Attack");
+                WitchAudio.PlayWitchVeryAngrySound();
                 while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
                 {
                     yield return null;

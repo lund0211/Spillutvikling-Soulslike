@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 public class WitchAudio : MonoBehaviour
 {
@@ -7,9 +8,11 @@ public class WitchAudio : MonoBehaviour
 
     AudioSource audioSource;
     [SerializeField]
-    AudioClip[] WitchSounds;
-    [SerializeField]
     AudioClip WitchAggroedSound;
+    [SerializeField]
+    AudioClip WitchThrowGruntSound;
+    [SerializeField]
+    AudioClip WitchVeryAngrySound;
 
     float volume;
     float volumeMultiplier = 1f;
@@ -26,14 +29,23 @@ public class WitchAudio : MonoBehaviour
         
     }
 
-    public void PlayWitchSound()
-    {
-        int randomIndex = UnityEngine.Random.Range(0, WitchSounds.Length);
-        AudioClip randomSound = WitchSounds[randomIndex];
-        audioSource.PlayOneShot(randomSound, volume);
-    }
     public void PlayWitchAggroedSound()
     {
         audioSource.PlayOneShot(WitchAggroedSound, volume);
+    }
+    public void PlayWitchThrowGruntSound()
+    {
+        StartCoroutine(DelayPlayedSound(audioSource, WitchThrowGruntSound, 0.8f, 1f));
+    }
+
+    public void PlayWitchVeryAngrySound()
+    {
+        StartCoroutine(DelayPlayedSound(audioSource, WitchVeryAngrySound, 0.5f, 1f));
+    }
+
+    public IEnumerator DelayPlayedSound(AudioSource audioSource, AudioClip clip, float delay, float audioVolumeMultiplier)
+    {
+        yield return new WaitForSeconds(delay);
+        audioSource.PlayOneShot(clip, volume * audioVolumeMultiplier);
     }
 }
