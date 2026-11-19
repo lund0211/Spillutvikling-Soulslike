@@ -44,7 +44,7 @@ public class NormalEnemyBehavior : MonoBehaviour
 
     AttackType CurrentAttack;
 
-    bool IsDead = false;
+    public bool IsDead = false;
 
     void Start()
     {

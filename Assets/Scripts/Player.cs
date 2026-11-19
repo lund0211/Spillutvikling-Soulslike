@@ -63,14 +63,17 @@ public class Player : MonoBehaviour
 
     bool PauseStaminaRegen = false;
 
+    bool DeathSoundPlayed = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         Health = GetComponent<HealthBehavior>();
         CurrentStamina = MaxStamina;
+        Health.Damaged += OnDamageTaken;
     }
-    
+
     /* Unused test function, can be implemented if we want
     public void OnJump(InputAction.CallbackContext Context)
     {
@@ -103,7 +106,7 @@ public class Player : MonoBehaviour
             {
                 DodgeDirection = transform.forward;
             }
-                RemainingDodgeSpeedTime = DodgeSpeedTime;
+            RemainingDodgeSpeedTime = DodgeSpeedTime;
             StartCoroutine(StaminaRegenPauseTimer());
             AdjustStamina(-StaminaDodgeCost);
             StartCoroutine(DodgeTimer());
@@ -117,22 +120,26 @@ public class Player : MonoBehaviour
             IsSprinting = true;
             animator.SetBool("IsSprinting", true);
         }
-        else if(Context.canceled)
+        else if (Context.canceled)
         {
             IsSprinting = false;
             animator.SetBool("IsSprinting", false);
             StartCoroutine(StaminaRegenPauseTimer());
         }
-        
+
     }
 
     public void OnAttack(InputAction.CallbackContext Context)
     {
         if (Context.started && !IsAttacking && CurrentStamina >= StaminaAttackCost)
         {
-            StartCoroutine(StaminaRegenPauseTimer());
-            AdjustStamina(-StaminaAttackCost);
-            StartCoroutine(AttackTimer());
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if ((stateInfo.IsName("Idle") || stateInfo.IsName("Walking") || stateInfo.IsName("Sprint")) && (!animator.IsInTransition(0)))
+            {
+                StartCoroutine(StaminaRegenPauseTimer());
+                AdjustStamina(-StaminaAttackCost);
+                StartCoroutine(AttackTimer());
+            }
         }
     }
 
@@ -143,32 +150,37 @@ public class Player : MonoBehaviour
             if (Health != null)
             {
                 AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-                if (HealthPotionCount > 0 && (stateInfo.IsName("Idle") || stateInfo.IsName("Walking") || stateInfo.IsName("Sprint"))) { 
+                if (HealthPotionCount > 0 && (stateInfo.IsName("Idle") || stateInfo.IsName("Walking") || stateInfo.IsName("Sprint")))
+                {
                     Health.AdjustHealthBy(50f);
                     HealthPotionCount--;
                     animator.SetTrigger("Drinking");
+                    AudioManager.Instance.PlayDrinkingSound(0f, 1f);
                 }
 
             }
-       
+
         }
     }
 
-    private IEnumerator AttackTimer() { 
+    private IEnumerator AttackTimer()
     {
-        animator.SetTrigger("Attack"); 
-        IsAttacking = true;
-        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack"))
         {
-            yield return null;
-        }
-          
+
+            animator.SetTrigger("Attack");
+            AudioManager.Instance.PlaySwordSound(0.2f, 1f);
+            IsAttacking = true;
+            while (!animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack"))
+            {
+                yield return null;
+            }
+
             while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
             {
                 yield return null;
             }
             IsAttacking = false;
-            Debug.Log("Attack Finished");
+            
         }
     }
 
@@ -196,7 +208,7 @@ public class Player : MonoBehaviour
 
     void MovementFunc()
     {
-        if(IsAttacking == true || DisableMovement == true)
+        if (IsAttacking == true || DisableMovement == true)
         {
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
             return;
@@ -209,11 +221,11 @@ public class Player : MonoBehaviour
 
         Forward.Normalize();
         Right.Normalize();
-        
+
 
         Movement = MoveInput.y * Forward + MoveInput.x * Right;
 
-        if(RemainingDodgeSpeedTime > 0)
+        if (RemainingDodgeSpeedTime > 0)
         {
             rb.linearVelocity = new Vector3(DodgeDirection.x * DodgeSpeed, rb.linearVelocity.y, DodgeDirection.z * DodgeSpeed);
 
@@ -237,14 +249,14 @@ public class Player : MonoBehaviour
         }
 
         StaminaRegeneration();
-        Debug.Log("Current Stamina: " + CurrentStamina);
+        //Debug.Log("Current Stamina: " + CurrentStamina);
 
     }
 
     public void AdjustStamina(float amount)
     {
         CurrentStamina += amount;
-        if(CurrentStamina > MaxStamina)
+        if (CurrentStamina > MaxStamina)
         {
             CurrentStamina = MaxStamina;
         }
@@ -269,34 +281,43 @@ public class Player : MonoBehaviour
         PauseStaminaRegen = false;
     }
 
-void Update()
-    {
-        
-    }
-
-    private void FixedUpdate()
+    private void Update()
     {
         MovementFunc();
         animator.SetFloat("Speed", Movement.magnitude);
 
-        if(IsSprinting == true)
+        if (IsSprinting == true)
         {
             AdjustStamina(-StaminaSprintCost * Time.deltaTime);
-            if(CurrentStamina <= 0)
+            if (CurrentStamina <= 0)
             {
                 IsSprinting = false;
                 animator.SetBool("IsSprinting", false);
             }
         }
-        if(Health.CurrentHealth <= 0)
+        if (Health.CurrentHealth <= 0)
         {
             animator.SetBool("Dead", true);
             DisableHitbox();
             DisableMovementFunc();
+            if (!DeathSoundPlayed)
+            {
+                AudioManager.Instance.PlayDyingSound(0f, 1f);
+                DeathSoundPlayed = true;
+            }
         }
         else
         {
+            DeathSoundPlayed = false;
             animator.SetBool("Dead", false);
+        }
+    }
+
+    public void OnDamageTaken()
+    {
+        if (Health.CurrentHealth > 0)
+        {
+            AudioManager.Instance.PlayHurtSound(0f, 1f);
         }
     }
 
@@ -333,5 +354,6 @@ void Update()
     {
         PotionInHand.SetActive(false);
     }
+
 
 }

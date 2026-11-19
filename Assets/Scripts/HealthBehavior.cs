@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class HealthBehavior : MonoBehaviour
@@ -11,6 +12,8 @@ public class HealthBehavior : MonoBehaviour
     [SerializeField]
     private DeathScreenManager deathScreenManager;
     public bool Dead = false;
+
+    public event Action Damaged;
 
 
 
@@ -51,6 +54,10 @@ public class HealthBehavior : MonoBehaviour
             {
                 deathScreenManager.ShowDeathScreen();
             }
+        }
+        if(Amount < 0)
+        {
+            Damaged?.Invoke();
         }
     }
 
