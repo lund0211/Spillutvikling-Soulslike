@@ -249,7 +249,7 @@ public class Player : MonoBehaviour
         }
 
         StaminaRegeneration();
-        Debug.Log("Current Stamina: " + CurrentStamina);
+        //Debug.Log("Current Stamina: " + CurrentStamina);
 
     }
 

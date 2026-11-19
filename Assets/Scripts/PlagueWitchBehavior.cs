@@ -50,6 +50,8 @@ public class PlagueWitchBehavior : MonoBehaviour
 
     EnemyRespawnBehavior RespawnBehavior;
 
+    bool PlayedAggroSound = false;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -77,15 +79,22 @@ public class PlagueWitchBehavior : MonoBehaviour
         if(Distance > 50)
         {
             LoseAggro();
+            PlayedAggroSound = false;
             return;
         }
 
         Agent.destination = PlayerTarget.position;
+
+        if(!PlayedAggroSound)
+        {
+            GetComponent<WitchAudio>().PlayWitchAggroedSound();
+            PlayedAggroSound = true;
+        }
         if (!LockRotation)
         {
             RotateWitch();
         }
-        if ((CanAttack == true) && (Vector3.Dot(transform.forward, PlayerDirection) >= 0.99))
+        if ((CanAttack == true) && (Vector3.Dot(transform.forward, PlayerDirection) >= 0.99) && (Distance < 15f))
         {
            CanAttack = false;
             //CurrentAttack = (AttackType)Random.Range(0, 2);
@@ -102,19 +111,25 @@ public class PlagueWitchBehavior : MonoBehaviour
             Agent.isStopped = true;
             animator.SetBool("Dead", true);
             RespawnBehavior.IsDead();
+            DisableHitboxBroom();
+            DisableHitboxPitchfork();
             return;
         }
     }
 
     private IEnumerator AttackCooldownTimer()
     {
-
         if (Distance < 3f)
         {
             CurrentAttack = (AttackType)Random.Range(0, 2);
-        } else
+        }
+        else if(Distance < 15f)
         {
             CurrentAttack = AttackType.Thrust;
+        }
+        else
+        {
+            yield break;
         }
 
         switch (CurrentAttack)
@@ -140,7 +155,6 @@ public class PlagueWitchBehavior : MonoBehaviour
                 {
                     yield return null;
                 }
-                Debug.Log("Swipe Attack Finished");
                 Agent.isStopped = false;
                 LockRotation = false;
                 break;
@@ -159,7 +173,6 @@ public class PlagueWitchBehavior : MonoBehaviour
         WitchMesh.localPosition = Vector3.zero;
         WitchMesh.localRotation = Quaternion.identity;
 
-        Debug.Log("Witch can Attack again");
         CanAttack = true;
     }
 
