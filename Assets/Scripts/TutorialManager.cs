@@ -22,6 +22,7 @@ public class TutorialManager : MonoBehaviour
         {
         "Hold 'SHIFT' to sprint.",
         "Left-Click to attack.",
+        "Press 'SPACE' to dodge",
         "Press R to heal.",
         "Press 'E' to interact",
         "If you need to rest, find a bonfire and lit it on fire.",

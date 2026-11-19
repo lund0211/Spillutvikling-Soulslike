@@ -6,6 +6,7 @@ public class TeleportBehavior : MonoBehaviour
     [SerializeField] private Transform teleportBodyTransform;
     [SerializeField] private TeleportManager teleportManager;
     [SerializeField] private GameObject teleportMenyPrompt;
+    [SerializeField] private bool returnToVillage;
     private Player playerNearby;
    
     // register that player walks within trigger area close to the ship
@@ -38,7 +39,7 @@ public class TeleportBehavior : MonoBehaviour
     {
         if (playerNearby != null && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
         {
-            teleportManager.StartTeleport(playerNearby, teleportBodyTransform);
+            teleportManager.StartTeleport(playerNearby, teleportBodyTransform, returnToVillage);
         }
     }
 }
