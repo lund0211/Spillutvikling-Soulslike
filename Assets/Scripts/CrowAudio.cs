@@ -13,10 +13,14 @@ public class CrowAudio : MonoBehaviour
     float MinDelay = 5f;
     [SerializeField]
     float MaxDelay = 15f;
+
+    float volume;
+    float volumeMultiplier = 1f;
     void Start()
     {
         StartCoroutine(PlayCrowSounds());
         CrowAudioSource = GetComponent<AudioSource>();
+        volume = AudioManager.Instance.masterVolume * volumeMultiplier;
     }
 
     // Update is called once per frame
@@ -33,7 +37,7 @@ public class CrowAudio : MonoBehaviour
             yield return new WaitForSeconds(delay);
             int randomIndex = Random.Range(0, CrowSounds.Length);
             AudioClip randomSound = CrowSounds[randomIndex];
-            CrowAudioSource.PlayOneShot(randomSound);
+            CrowAudioSource.PlayOneShot(randomSound, volume);
         }
     }
 }
