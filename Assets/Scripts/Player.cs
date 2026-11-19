@@ -63,12 +63,15 @@ public class Player : MonoBehaviour
 
     bool PauseStaminaRegen = false;
 
+    bool DeathSoundPlayed = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         Health = GetComponent<HealthBehavior>();
         CurrentStamina = MaxStamina;
+        Health.Damaged += OnDamageTaken;
     }
     
     /* Unused test function, can be implemented if we want
@@ -156,7 +159,8 @@ public class Player : MonoBehaviour
 
     private IEnumerator AttackTimer() { 
     {
-        animator.SetTrigger("Attack"); 
+        animator.SetTrigger("Attack");
+        AudioManager.Instance.PlaySwordSound(0.2f, 1f);
         IsAttacking = true;
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack"))
         {
@@ -269,12 +273,7 @@ public class Player : MonoBehaviour
         PauseStaminaRegen = false;
     }
 
-void Update()
-    {
-        
-    }
-
-    private void FixedUpdate()
+    private void Update()
     {
         MovementFunc();
         animator.SetFloat("Speed", Movement.magnitude);
@@ -293,10 +292,24 @@ void Update()
             animator.SetBool("Dead", true);
             DisableHitbox();
             DisableMovementFunc();
+            if (!DeathSoundPlayed)
+            {
+                AudioManager.Instance.PlayDyingSound(0f, 1f);
+                DeathSoundPlayed = true;
+            }
         }
         else
         {
+            DeathSoundPlayed = false;
             animator.SetBool("Dead", false);
+        }
+    }
+
+    public void OnDamageTaken()
+    {
+        if (Health.CurrentHealth > 0)
+        {
+            AudioManager.Instance.PlayHurtSound(0f, 1f);
         }
     }
 
@@ -333,5 +346,6 @@ void Update()
     {
         PotionInHand.SetActive(false);
     }
+    
 
 }
