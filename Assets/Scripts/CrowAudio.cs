@@ -10,9 +10,9 @@ public class CrowAudio : MonoBehaviour
     AudioClip[] CrowSounds;
 
     [SerializeField]
-    float MinDelay = 5f;
+    float MinDelay = 10f;
     [SerializeField]
-    float MaxDelay = 15f;
+    float MaxDelay = 20f;
 
     float volume;
     float volumeMultiplier = 1f;

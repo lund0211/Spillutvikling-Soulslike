@@ -218,4 +218,10 @@ public class PlagueWitchBehavior : MonoBehaviour
         DisableHitboxBroom();
     }
 
+    public void WeakenWitch()
+    {
+        float damage = health.GetMaxHealth() * 0.2f;
+        health.AdjustHealthBy(-damage);
+    }
+
 }
