@@ -286,7 +286,7 @@ public class Player : MonoBehaviour
         MovementFunc();
         animator.SetFloat("Speed", Movement.magnitude);
 
-        if (IsSprinting == true)
+        if (IsSprinting == true && IsEnemyNearby())
         {
             AdjustStamina(-StaminaSprintCost * Time.deltaTime);
             if (CurrentStamina <= 0)
@@ -319,6 +319,20 @@ public class Player : MonoBehaviour
         {
             AudioManager.Instance.PlayHurtSound(0f, 1f);
         }
+    }
+
+    private bool IsEnemyNearby()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distance <= 30f)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void EnableHitbox()
