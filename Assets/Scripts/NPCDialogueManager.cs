@@ -12,6 +12,7 @@ public class NPCDialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI continueText;
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
+    [SerializeField] private HideCursor hideCursor;
 
     private string[] currentDialogue;
     private int currentIndex;
@@ -45,6 +46,7 @@ public class NPCDialogueManager : MonoBehaviour
         yesButton.gameObject.SetActive(true);
         noButton.gameObject.SetActive(true);
 
+        hideCursor.UnlockCursor();
     }
 
     public void StartSimplerDialogue(string[] dialogue) // for encontering plaguedoctor nr 2 and nr 3
@@ -60,6 +62,7 @@ public class NPCDialogueManager : MonoBehaviour
         instructionPanel.SetActive(true);
 
         ShowNextInstruction();
+        hideCursor.UnlockCursor();
     }
 
 
@@ -105,7 +108,8 @@ public class NPCDialogueManager : MonoBehaviour
         instructionPanel.SetActive(false);
         isDialogueActive = false;
         showingInstructions= false;
-      
+
+        hideCursor.LockCursor();
     }
 }
 
