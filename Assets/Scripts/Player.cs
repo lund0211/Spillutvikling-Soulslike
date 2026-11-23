@@ -379,5 +379,10 @@ public class Player : MonoBehaviour
         return CurrentStamina;
     }
 
+    public int GetHealthPotionCount()
+    {
+        return HealthPotionCount;
+    }
+
 
 }
