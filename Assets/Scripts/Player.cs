@@ -369,5 +369,20 @@ public class Player : MonoBehaviour
         PotionInHand.SetActive(false);
     }
 
+    public float GetMaxStamina()
+    {
+        return MaxStamina;
+    }
+
+    public float GetCurrentStamina()
+    {
+        return CurrentStamina;
+    }
+
+    public int GetHealthPotionCount()
+    {
+        return HealthPotionCount;
+    }
+
 
 }
