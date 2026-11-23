@@ -1,32 +1,34 @@
+
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBehavior : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
     [SerializeField]
     private float MaxHealth = 100;
+
     [SerializeField]
     public float CurrentHealth;
+
     [SerializeField]
     private DeathScreenManager deathScreenManager;
+
+    [SerializeField]
+    private Slider healthSlider;
+
     public bool Dead = false;
-
-
-
 
     void Start()
     {
         CurrentHealth = MaxHealth;
 
+        if (healthSlider != null)
+        {
+            healthSlider.minValue = 0;
+            healthSlider.maxValue = MaxHealth;
+            healthSlider.value = CurrentHealth;
+        }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
     public void AdjustHealthBy(float Amount)
     {
@@ -34,7 +36,7 @@ public class HealthBehavior : MonoBehaviour
         {
             return;
         }
-        
+
         CurrentHealth += Amount;
 
         if (CurrentHealth > MaxHealth)
@@ -52,6 +54,11 @@ public class HealthBehavior : MonoBehaviour
                 deathScreenManager.ShowDeathScreen();
             }
         }
+
+        if (healthSlider != null)
+        {
+            healthSlider.value = CurrentHealth;
+        }
     }
 
     public float GetHealth()
@@ -59,10 +66,8 @@ public class HealthBehavior : MonoBehaviour
         return CurrentHealth;
     }
 
-
     public float GetMaxHealth()
     {
         return MaxHealth;
     }
-
 }
