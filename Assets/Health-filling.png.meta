@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3e5cf24c719a2e04494168d9cf21215f
+guid: af3ed88ae4ba3e943927419c5f2f143a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3698716774796292511
-    second: Health_Rowan_0
+      213: 1592887951523486521
+    second: Health-filling_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Health_Rowan_0
+      name: Health-filling_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 16e0d71a0b48bacc0800000000000000
-      internalID: -3698716774796292511
+      spriteID: 93b9e8507231b1610800000000000000
+      internalID: 1592887951523486521
       vertices: []
       indices: 
       edges: []
