@@ -22,7 +22,6 @@ public class VisionConeBehavior : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
 
-        Debug.Log("OnTriggerStay");
         if (other.CompareTag("Player"))
         {
             Vector3 EnemyPos = transform.position;
@@ -33,17 +32,12 @@ public class VisionConeBehavior : MonoBehaviour
             float Angle = Vector3.Angle(EnemyVector, PlayerVector);
             bool IsInCone = Angle < 45f;
 
-            Debug.Log("Angle: " + Angle);
-            Debug.Log("IsInCone: " + IsInCone);
-
             bool IsPlayerClose = Vector3.Distance(EnemyPos, PlayerPos) < 5f;
 
-            Debug.Log("IsPlayerClose: " + IsPlayerClose);
 
             if(IsInCone || IsPlayerClose)
             {
                 Enemy.EnablePlayerFollow();
-                Debug.Log("Player detected");
             }
 
         }

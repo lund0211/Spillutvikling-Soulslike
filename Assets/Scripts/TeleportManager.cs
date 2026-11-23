@@ -5,7 +5,21 @@ public class TeleportManager : MonoBehaviour
 {
     [SerializeField] private CanvasGroup fadePanel;
     [SerializeField] private float fadeDuration = 1f;
-    
+    [SerializeField] private Transform boat;
+    [SerializeField] private Vector3 boatDestination;
+    [SerializeField] private Vector3 boatRotation;
+    private Vector3 originalBoatPosition;
+    private Quaternion originalBoatRotation;
+
+    private void Awake()
+    {
+        if (boat != null)
+        {
+            originalBoatPosition = boat.position;
+            originalBoatRotation = boat.rotation;
+        }
+    }
+
     public void TeleportPlayer(Player ourplayer, Transform teleportBodyTransform)
     {
         // checks if the player and the teleporting point exists
@@ -41,7 +55,7 @@ public class TeleportManager : MonoBehaviour
         fadePanel.alpha = endFading;
 
     }
-    private IEnumerator TeleportSequence(Player ourplayer, Transform teleportBodyTransform)
+    private IEnumerator TeleportSequence(Player ourplayer, Transform teleportBodyTransform, bool returnToVillage)
     {
 
         //make the screen fade to black
@@ -51,12 +65,29 @@ public class TeleportManager : MonoBehaviour
         //teleport the player
         TeleportPlayer(ourplayer, teleportBodyTransform);
 
+        // teleport the boat
+        if (boat != null)
+        {
+            if (returnToVillage)
+            {
+                boat.position = originalBoatPosition;
+                boat.rotation = originalBoatRotation;
+            }
+            else
+            {
+
+                boat.position = boatDestination;
+                boat.rotation = Quaternion.Euler(boatRotation);
+            }
+        }
+
         // make the screen visible again
         yield return StartCoroutine(Fade(1f, 0f));
     }
 
-    public void StartTeleport(Player ourplayer, Transform teleportBodyTransform)
+    public void StartTeleport(Player ourplayer, Transform teleportBodyTransform, bool returnToVillage)
+    
     {
-        StartCoroutine(TeleportSequence(ourplayer, teleportBodyTransform));
+        StartCoroutine(TeleportSequence(ourplayer, teleportBodyTransform, returnToVillage));
     }
 }

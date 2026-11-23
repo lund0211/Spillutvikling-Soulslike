@@ -8,7 +8,7 @@ public class DeathScreenManager : MonoBehaviour
     private GameObject deathScreenCanvas;
 
     [SerializeField]
-    private Transform player; // gives us access to the player's position
+    private Player player; // gives us access to the player's position
 
     [SerializeField]
     private Rigidbody playerRigidbody;
@@ -63,9 +63,11 @@ public class DeathScreenManager : MonoBehaviour
                 playerHealth.AdjustHealthBy(missingHealth);
 
             }
-            // hides the death screen after respawning
-            deathScreenCanvas.SetActive(false);
+        // hides the death screen after respawning
 
+            RespawnEnemies();
+            deathScreenCanvas.SetActive(false);
+            player.EnableMovementFunc();
             isRespawning = false;
         
 
@@ -73,6 +75,21 @@ public class DeathScreenManager : MonoBehaviour
     private bool isRespawning = false;
 
     private Vector3 startPosition;
+    private void RespawnEnemies()
+    {
+        EnemyRespawnBehavior[] enemies =
+            FindObjectsByType<EnemyRespawnBehavior>(
+                FindObjectsInactive.Include,
+                FindObjectsSortMode.None);
+
+        foreach (EnemyRespawnBehavior enemy in enemies)
+        {
+            enemy.Respawn();
+        }
+    }
+
+
  }
-   
+
+
 

@@ -15,7 +15,15 @@ public class NormalEnemyBehavior : MonoBehaviour
     GameObject Player;
 
     [SerializeField]
-    GameObject Hitbox;
+    GameObject HitboxSword;
+
+    [SerializeField]
+    GameObject HitboxLeg;
+
+    HealthBehavior Health;
+
+    float attackCooldown = 1f;
+
 
     bool PlayerBeingChased = false;
 
@@ -23,10 +31,26 @@ public class NormalEnemyBehavior : MonoBehaviour
 
     bool CanAttack = true;
 
+    Vector3 PlayerDirection;
+
+    float TurnSpeed = 10f;
+
+    public enum AttackType
+    {
+        SwordAttack,
+        KickAttack
+
+    }
+
+    AttackType CurrentAttack;
+
+    public bool IsDead = false;
+
     void Start()
     {
         Agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        Health = GetComponent<HealthBehavior>();
     }
 
     // Update is called once per frame
@@ -36,23 +60,63 @@ public class NormalEnemyBehavior : MonoBehaviour
         animator.SetFloat("Speed", MovementSpeed);
 
 
-        if (PlayerBeingChased && CanAttack)
+        if (PlayerBeingChased && CanAttack && !IsDead)
         {
             Agent.destination = Player.transform.position;
         }
+        if(PlayerBeingChased && !IsDead)
+        {
+            RotateEnemy();
+        }
+ 
 
-        if(Vector3.Distance(Agent.transform.position, Player.transform.position) < 2f && CanAttack)
+        //Agent.updateRotation = PlayerBeingChased;
+
+        //PlayerDirection = (Player.transform.position - transform.position).normalized;
+
+        if (Vector3.Distance(Agent.transform.position, Player.transform.position) < 1.5f && CanAttack && Vector3.Angle(transform.forward, PlayerDirection) <= 30f)
         {
             CanAttack = false;
-            animator.SetTrigger("Attack Sword");
+            CurrentAttack = (AttackType)Random.Range(0, 2);
+            switch(CurrentAttack)
+            {
+                case AttackType.SwordAttack:
+                    animator.SetTrigger("Attack Sword");
+                    break;
+                case AttackType.KickAttack:
+                    animator.SetTrigger("Attack Kick");
+                    
+                    break;
+                }
             StartCoroutine(AttackCooldownTimer());
+        }
+
+        if(Health.CurrentHealth <= 0 )
+        {
+            animator.SetBool("Dead", true);
+            DisableHitboxSword();
+            DisableHitboxLeg();
+            IsDead = true;
+        }
+        else
+        {
+            animator.SetBool("Dead", false);
+            IsDead = false; 
         }
     }
 
     private IEnumerator AttackCooldownTimer()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(attackCooldown);
         CanAttack = true;
+    }
+    private void RotateEnemy()
+    {
+        PlayerDirection = Player.transform.position - transform.position;
+        PlayerDirection.y = 0f;
+        PlayerDirection.Normalize();
+        Quaternion PlayerRotation = Quaternion.LookRotation(PlayerDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, PlayerRotation, TurnSpeed * Time.deltaTime);
     }
 
     public void EnablePlayerFollow()
@@ -62,12 +126,22 @@ public class NormalEnemyBehavior : MonoBehaviour
 
     public void EnableHitboxSword()
     {
-        Hitbox.SetActive(true);
+        HitboxSword.SetActive(true);
     }
 
     public void DisableHitboxSword()
     {
-        Hitbox.SetActive(false);
+        HitboxSword.SetActive(false);
+    }
+
+    public void EnableHitboxLeg()
+    {
+        HitboxLeg.SetActive(true);
+    }
+
+    public void DisableHitboxLeg()
+    {
+        HitboxLeg.SetActive(false);
     }
 
     public void ResetChase()

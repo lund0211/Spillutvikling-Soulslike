@@ -1,4 +1,6 @@
 
+using System;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +19,11 @@ public class HealthBehavior : MonoBehaviour
     private Slider healthSlider;
 
     public bool Dead = false;
+
+    public event Action Damaged;
+
+
+
 
     void Start()
     {
@@ -55,9 +62,16 @@ public class HealthBehavior : MonoBehaviour
             }
         }
 
+
         if (healthSlider != null)
         {
             healthSlider.value = CurrentHealth;
+
+            if (Amount < 0)
+            {
+                Damaged?.Invoke();
+
+            }
         }
     }
 
