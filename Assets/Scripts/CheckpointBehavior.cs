@@ -85,6 +85,7 @@ public class CheckpointBehavior : MonoBehaviour
             animator.SetTrigger("Sitting");
             RespawnAllEnemies();
             playerBehavior.RestorePotionCount();
+            playerBehavior.AdjustStamina(playerBehavior.GetMaxStamina());
 
             // restores the player's health to maximum
             if (playerHealth != null)

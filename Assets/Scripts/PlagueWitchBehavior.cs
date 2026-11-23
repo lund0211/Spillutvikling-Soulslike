@@ -32,7 +32,7 @@ public class PlagueWitchBehavior : MonoBehaviour
     Animator animator;
 
     [SerializeField]
-    Transform PlayerTarget;
+    Player PlayerTarget;
 
     NavMeshAgent Agent;
     float Distance;
@@ -54,6 +54,7 @@ public class PlagueWitchBehavior : MonoBehaviour
 
     WitchAudio WitchAudio;
 
+    bool Aggro = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
 
@@ -77,32 +78,38 @@ public class PlagueWitchBehavior : MonoBehaviour
     void Update()
     {
 
-        Distance = Vector3.Distance(Agent.transform.position, PlayerTarget.position);
-        if(Distance > 50)
+        Distance = Vector3.Distance(Agent.transform.position, PlayerTarget.transform.position);
+        //if(Distance > 50)
+        //{
+            //LoseAggro();
+            //return;
+        //}
+        if (Aggro == true)
+        {
+            Agent.destination = PlayerTarget.transform.position;
+
+            if (!PlayedAggroSound)
+            {
+                WitchAudio.PlayWitchAggroedSound();
+                PlayedAggroSound = true;
+            }
+            if (!LockRotation)
+            {
+                RotateWitch();
+            }
+            if ((CanAttack == true) && (Vector3.Dot(transform.forward, PlayerDirection) >= 0.99) && (Distance < 15f))
+            {
+                CanAttack = false;
+                StartCoroutine(AttackCooldownTimer());
+            }
+
+        }
+
+        HealthBehavior PlayerHealth = PlayerTarget.GetComponent<HealthBehavior>();
+        if (PlayerHealth.GetHealth() <= 0)
         {
             LoseAggro();
-            PlayedAggroSound = false;
-            return;
         }
-
-        Agent.destination = PlayerTarget.position;
-
-        if(!PlayedAggroSound)
-        {
-            WitchAudio.PlayWitchAggroedSound();
-            PlayedAggroSound = true;
-        }
-        if (!LockRotation)
-        {
-            RotateWitch();
-        }
-        if ((CanAttack == true) && (Vector3.Dot(transform.forward, PlayerDirection) >= 0.99) && (Distance < 15f))
-        {
-           CanAttack = false;
-            StartCoroutine(AttackCooldownTimer());
-        }
-
-        
         
         
         animator.SetFloat("Speed", Agent.velocity.magnitude);
@@ -201,14 +208,14 @@ public class PlagueWitchBehavior : MonoBehaviour
 
     private void RotateWitch()
     {
-        PlayerDirection = PlayerTarget.position - transform.position;
+        PlayerDirection = PlayerTarget.transform.position - transform.position;
         PlayerDirection.y = 0f;
         PlayerDirection.Normalize();
         Quaternion PlayerRotation = Quaternion.LookRotation(PlayerDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, PlayerRotation, TurnSpeed * Time.deltaTime);
     }
 
-    private void LoseAggro()
+    public void LoseAggro()
     {
         Agent.isStopped = true;
         Agent.ResetPath();
@@ -216,6 +223,12 @@ public class PlagueWitchBehavior : MonoBehaviour
         CanAttack = true;
         DisableHitboxPitchfork();
         DisableHitboxBroom();
+        PlayedAggroSound = false;
+        Aggro = false;
+    }
+    public void GainAggro()
+    {
+        Aggro = true;
     }
 
     public void WeakenWitch()

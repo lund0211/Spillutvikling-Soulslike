@@ -51,7 +51,8 @@ public class DeathScreenManager : MonoBehaviour
           if (checkpointManager.HasCheckpoint())
            {
               playerRigidbody.position = checkpointManager.GetCheckpointPosition();  // sets the player's position to last activated checkpoint
-           }
+              player.AdjustStamina(player.GetMaxStamina());
+        }
             else
             {
                 playerRigidbody.position = startPosition;
