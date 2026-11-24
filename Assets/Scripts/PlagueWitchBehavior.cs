@@ -1,10 +1,6 @@
 using System.Collections;
-using Unity.AppUI.UI;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
-using static PlagueWitchBehavior;
 
 public class PlagueWitchBehavior : MonoBehaviour
 {

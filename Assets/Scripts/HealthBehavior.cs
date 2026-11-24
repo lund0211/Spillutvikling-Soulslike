@@ -62,17 +62,11 @@ public class HealthBehavior : MonoBehaviour
             }
         }
 
-
-        if (healthSlider != null)
+        if (Amount < 0)
         {
-            healthSlider.value = CurrentHealth;
+            Damaged?.Invoke();
 
-            if (Amount < 0)
-            {
-                Damaged?.Invoke();
-
-            }
-        }
+         }
     }
 
     public float GetHealth()
