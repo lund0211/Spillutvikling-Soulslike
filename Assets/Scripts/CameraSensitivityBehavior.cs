@@ -4,11 +4,15 @@ using System;
 
 public class CameraSensitivityBehavior : MonoBehaviour
 {
-    [SerializeField]
-    private float CameraSensitivity = 10;
+    public static CameraSensitivityBehavior Instance;
+    public float CameraSensitivity = 10;
     private CinemachineInputAxisController axisController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         axisController = GetComponent<CinemachineInputAxisController>();
