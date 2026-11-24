@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/VillageScene.unity
     guid: e655826d2c54dd546ba37fc60dbfa353
   - enabled: 1
-    path: Assets/Scenes/UI_pause_menu.unity
+    path: Assets/Scenes/PauseMenu.unity
     guid: 29d4c8d4dee3639468948e9a471f0da2
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
