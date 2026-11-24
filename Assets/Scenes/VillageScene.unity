@@ -7842,6 +7842,7 @@ GameObject:
   - component: {fileID: 398924511}
   - component: {fileID: 398924513}
   - component: {fileID: 398924510}
+  - component: {fileID: 398924514}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: MainCamera
@@ -7992,7 +7993,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: -494730987969074062, guid: e9c4bc7d57821c744a42f7f9b3794037, type: 3}
-        Gain: 50
+        Gain: 10
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -8003,7 +8004,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: -494730987969074062, guid: e9c4bc7d57821c744a42f7f9b3794037, type: 3}
-        Gain: -50
+        Gain: -10
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -8074,6 +8075,19 @@ MonoBehaviour:
     NearLimit: 5
     FarLimit: 30
     MaxQualityBoost: 0.2
+--- !u!114 &398924514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398924505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6056dc0c76f09744eadc88846ed1474d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraSensitivityBehavior
+  CameraSensitivity: 10
 --- !u!1001 &405016884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73189,43 +73203,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 82354b7bd166a7649a9d93101303ae5f, type: 3}
   m_PrefabInstance: {fileID: 1834099198}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &1835158656
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: WaterDepthMap
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 6
-  m_Width: 1024
-  m_Height: 1024
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_UseDynamicScaleExplicit: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1001 &1836320650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75003,6 +74980,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PotionCountDisplayBehavior
   text: {fileID: 970823889}
+--- !u!84 &1876455559
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WaterDepthMap
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 6
+  m_Width: 1024
+  m_Height: 1024
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_UseDynamicScaleExplicit: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!4 &1878937342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6e2eab48a2a561b4fa3c068ad21b25fe, type: 3}
