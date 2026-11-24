@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -98,6 +99,8 @@ public class MainMenuController : MonoBehaviour
     public void Options()
     {
         Debug.Log("Options clicked");
+
+
     }
 
     public void QuitGame()

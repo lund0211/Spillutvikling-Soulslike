@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using System;
 
 public class PauseManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class PauseManager : MonoBehaviour
     private string pauseSceneName = "PauseMenu";
 
     private bool isTransitioning = false;
+
 
     void Update()
     {
@@ -111,6 +113,7 @@ public class PauseManager : MonoBehaviour
         GameIsPaused = false;
         isTransitioning = false;
     }
+
 
     private void OnDestroy()
     {
