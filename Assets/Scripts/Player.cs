@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
         Health.Damaged += OnDamageTaken;
 
         //For testing
-        rb.position = new Vector3(14.24f, 24.433f, 332.24f);
+        //rb.position = new Vector3(14.24f, 24.433f, 332.24f);
     }
 
     /* Unused test function, can be implemented if we want
