@@ -14,7 +14,7 @@ public class TutorialManager : MonoBehaviour
     {
         "It's a dark time for Renwick village... ",
         "The Plague Hag has killed almost everyone...",
-        "Find the Hag and end her reign of pestilance and terror!"
+        "Find the Hag and end her reign of pestilence and terror!"
     };
 
     private IEnumerator Start()
