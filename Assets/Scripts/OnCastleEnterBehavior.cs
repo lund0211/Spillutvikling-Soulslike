@@ -8,6 +8,9 @@ public class OnCastleEnterBehavior : MonoBehaviour
     [SerializeField]
     PlagueWitchBehavior witch;
 
+    [SerializeField]
+    private HagHealthBar hagHealthBar;
+
     void Start()
     {
         
@@ -24,6 +27,13 @@ public class OnCastleEnterBehavior : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             witch.GainAggro();
+
+
+            // Show the Hag's health bar
+            if (hagHealthBar != null)
+            {
+                hagHealthBar.ShowHealthBar();
+            }
         }
     }
 }
