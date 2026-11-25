@@ -44,7 +44,7 @@ public class EnemyRespawnBehavior : MonoBehaviour
         agent.ResetPath();
         transform.SetPositionAndRotation(StartPosition, StartRotation);
         agent.Warp(StartPosition);
-        Health.CurrentHealth = Health.GetMaxHealth();
+        Health.CurrentHealth = Health.RespawnHealth;
         if (EnemyBehavior != null)
         {
             EnemyBehavior.ResetChase();

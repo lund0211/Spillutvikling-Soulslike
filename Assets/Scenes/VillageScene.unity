@@ -9597,6 +9597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBehavior
   MaxHealth: 10
   CurrentHealth: 0
+  RespawnHealth: 0
   deathScreenManager: {fileID: 0}
   healthSlider: {fileID: 0}
   Dead: 0
@@ -17249,6 +17250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBehavior
   MaxHealth: 10
   CurrentHealth: 0
+  RespawnHealth: 0
   deathScreenManager: {fileID: 0}
   healthSlider: {fileID: 0}
   Dead: 0
@@ -19582,6 +19584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBehavior
   MaxHealth: 10
   CurrentHealth: 0
+  RespawnHealth: 0
   deathScreenManager: {fileID: 0}
   healthSlider: {fileID: 0}
   Dead: 0
@@ -26196,6 +26199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBehavior
   MaxHealth: 30
   CurrentHealth: 0
+  RespawnHealth: 0
   deathScreenManager: {fileID: 0}
   healthSlider: {fileID: 0}
   Dead: 0
@@ -28866,6 +28870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBehavior
   MaxHealth: 10
   CurrentHealth: 0
+  RespawnHealth: 0
   deathScreenManager: {fileID: 0}
   healthSlider: {fileID: 0}
   Dead: 0
@@ -31278,6 +31283,43 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1674268716328342803, guid: 38b797ba6cc77df40a51cd3200365644, type: 3}
+--- !u!84 &1298552498
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WaterDepthMap
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 6
+  m_Width: 1024
+  m_Height: 1024
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_UseDynamicScaleExplicit: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1001 &1299457822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73962,6 +74004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBehavior
   MaxHealth: 10
   CurrentHealth: 0
+  RespawnHealth: 0
   deathScreenManager: {fileID: 0}
   healthSlider: {fileID: 0}
   Dead: 0
@@ -74401,19 +74444,19 @@ PrefabInstance:
       objectReference: {fileID: 1086682453}
     - target: {fileID: 1827984898678780319, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -51.39
+      value: -50.057
       objectReference: {fileID: 0}
     - target: {fileID: 1827984898678780319, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.4
+      value: 3.228
       objectReference: {fileID: 0}
     - target: {fileID: 1827984898678780319, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.77
+      value: 7.005
       objectReference: {fileID: 0}
     - target: {fileID: 1827984898678780319, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6215454
+      value: 0.8103018
       objectReference: {fileID: 0}
     - target: {fileID: 1827984898678780319, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
       propertyPath: m_LocalRotation.x
@@ -74421,7 +74464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1827984898678780319, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7833782
+      value: -0.58601296
       objectReference: {fileID: 0}
     - target: {fileID: 1827984898678780319, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
       propertyPath: m_LocalRotation.z
@@ -74433,7 +74476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1827984898678780319, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 103.142
+      value: -71.749
       objectReference: {fileID: 0}
     - target: {fileID: 1827984898678780319, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -74444,7 +74487,8 @@ PrefabInstance:
       value: Altar (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2732140699949023596, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
@@ -76892,6 +76936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBehavior
   MaxHealth: 10
   CurrentHealth: 0
+  RespawnHealth: 0
   deathScreenManager: {fileID: 0}
   healthSlider: {fileID: 0}
   Dead: 0
@@ -80200,6 +80245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBehavior
   MaxHealth: 50
   CurrentHealth: 0
+  RespawnHealth: 0
   deathScreenManager: {fileID: 2133576792}
   healthSlider: {fileID: 0}
   Dead: 0
@@ -86042,7 +86088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1827984898678780319, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.893
+      value: 10.68
       objectReference: {fileID: 0}
     - target: {fileID: 1827984898678780319, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -86225,7 +86271,8 @@ PrefabInstance:
       value: Altar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2732140699949023596, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 103a606e8874fb34d8ed0089920a80eb, type: 3}

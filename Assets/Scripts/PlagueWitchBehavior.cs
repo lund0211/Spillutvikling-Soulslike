@@ -235,6 +235,7 @@ public class PlagueWitchBehavior : MonoBehaviour
     {
         float damage = health.GetMaxHealth() * 0.2f;
         health.AdjustHealthBy(-damage);
+        health.ReduceRespawnHealth(damage);
     }
 
     public void EndGame()

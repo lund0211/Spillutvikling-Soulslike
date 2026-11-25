@@ -12,6 +12,8 @@ public class HealthBehavior : MonoBehaviour
     [SerializeField]
     public float CurrentHealth;
 
+    public float RespawnHealth;
+
     [SerializeField]
     private DeathScreenManager deathScreenManager;
 
@@ -35,6 +37,8 @@ public class HealthBehavior : MonoBehaviour
             healthSlider.maxValue = MaxHealth;
             healthSlider.value = CurrentHealth;
         }
+
+        RespawnHealth = MaxHealth;
     }
 
     public void AdjustHealthBy(float Amount)
@@ -77,5 +81,10 @@ public class HealthBehavior : MonoBehaviour
     public float GetMaxHealth()
     {
         return MaxHealth;
+    }
+
+    public void ReduceRespawnHealth(float amount)
+    {
+        RespawnHealth = MaxHealth - amount;
     }
 }
