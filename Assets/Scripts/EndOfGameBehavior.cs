@@ -34,7 +34,7 @@ public class EndOfGameBehavior : MonoBehaviour
         yield return new WaitForSeconds(5);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        SceneManager.LoadScene("UI_meu");
+        SceneManager.LoadScene("UI_menu");
     }
 
 
