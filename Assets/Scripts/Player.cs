@@ -65,6 +65,8 @@ public class Player : MonoBehaviour
 
     bool DeathSoundPlayed = false;
 
+    bool CanAttack = true;
+
     private void Awake()
     {
 
@@ -135,7 +137,7 @@ public class Player : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext Context)
     {
-        if (Context.started && !IsAttacking && CurrentStamina >= StaminaAttackCost)
+        if (Context.started && !IsAttacking && CurrentStamina >= StaminaAttackCost && CanAttack)
         {
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
             if ((stateInfo.IsName("Idle") || stateInfo.IsName("Walking") || stateInfo.IsName("Sprint")) && (!animator.IsInTransition(0)))
@@ -386,6 +388,16 @@ public class Player : MonoBehaviour
     public int GetHealthPotionCount()
     {
         return HealthPotionCount;
+    }
+
+    public void DisableAttack()
+    {
+        CanAttack = false;
+    }
+
+    public void EnableAttack()
+    {
+        CanAttack = true;
     }
 
 
