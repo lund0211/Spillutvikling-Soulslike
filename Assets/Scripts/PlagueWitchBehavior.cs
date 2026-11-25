@@ -117,6 +117,7 @@ public class PlagueWitchBehavior : MonoBehaviour
             RespawnBehavior.IsDead();
             DisableHitboxBroom();
             DisableHitboxPitchfork();
+            Aggro = false;
             return;
         }
     }
