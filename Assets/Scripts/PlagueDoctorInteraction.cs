@@ -13,6 +13,8 @@ public class PlagueDoctorInteraction : MonoBehaviour
     private Transform playerTransform;
     private bool playerNearby = false;
     private bool waitForPlayerToLeave = false;
+
+    Player PlayerObject;
    
 
     private void Update()
@@ -28,6 +30,11 @@ public class PlagueDoctorInteraction : MonoBehaviour
                     waitForPlayerToLeave = false;
                     interactionPanel.SetActive(false);
                     npcDialogueManager.CloseDialogue();
+
+                    if(PlayerObject != null)
+                    {
+                        PlayerObject.EnableAttack();
+                    }
                 }
                 return;
             } if (!playerNearby)
@@ -70,11 +77,15 @@ public class PlagueDoctorInteraction : MonoBehaviour
             }
             waitForPlayerToLeave=true;
         }
+
+
         
     }
     private void OnTriggerEnter(Collider other)
     {
         Player player = other.GetComponentInParent<Player>();
+        PlayerObject = player;
+        player.DisableAttack();
 
         if (player != null) 
         {

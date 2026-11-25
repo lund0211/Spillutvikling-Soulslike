@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2300002}
   - component: {fileID: 13600000}
   - component: {fileID: 20500000}
+  - component: {fileID: 5161921397524278928}
   m_Layer: 10
   m_Name: pf_boulder_02_025
   m_TagString: Untagged
@@ -134,3 +135,26 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2300002}
   m_Enabled: 1
+--- !u!136 &5161921397524278928
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.7234414
+  m_Height: 2.797818
+  m_Direction: 1
+  m_Center: {x: -0.018395245, y: -0.0049003363, z: 0.00038909912}
