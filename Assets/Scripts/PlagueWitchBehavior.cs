@@ -51,6 +51,8 @@ public class PlagueWitchBehavior : MonoBehaviour
     WitchAudio WitchAudio;
 
     bool Aggro = false;
+
+    bool IsDead = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
 
@@ -118,6 +120,7 @@ public class PlagueWitchBehavior : MonoBehaviour
             DisableHitboxBroom();
             DisableHitboxPitchfork();
             Aggro = false;
+            EndGame();
             return;
         }
     }
@@ -233,5 +236,12 @@ public class PlagueWitchBehavior : MonoBehaviour
         float damage = health.GetMaxHealth() * 0.2f;
         health.AdjustHealthBy(-damage);
     }
+
+    public void EndGame()
+    {
+        EndOfGameBehavior VictoryScreen = GetComponent<EndOfGameBehavior>();
+        VictoryScreen.ShowVictoryScreen();
+    }
+
 
 }
