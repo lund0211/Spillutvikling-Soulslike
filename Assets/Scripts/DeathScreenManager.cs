@@ -19,6 +19,9 @@ public class DeathScreenManager : MonoBehaviour
     [SerializeField]
     private HealthBehavior playerHealth;
 
+    [SerializeField]
+    private CastleGate gate;
+
 
     // saves the player's startposition when the game begins
     private void Start()
@@ -67,6 +70,7 @@ public class DeathScreenManager : MonoBehaviour
         // hides the death screen after respawning
 
             RespawnEnemies();
+            gate.ResetGate();
             deathScreenCanvas.SetActive(false);
             player.EnableMovementFunc();
             isRespawning = false;
