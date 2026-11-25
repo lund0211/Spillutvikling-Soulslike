@@ -25,12 +25,13 @@ public class EndOfGameBehavior : MonoBehaviour
 
     public void ShowVictoryScreen()
     {
-        VictoryScreen.SetActive(true);
         StartCoroutine(ShowVictoryScreenTimer());
     }
 
     private IEnumerator ShowVictoryScreenTimer()
     {
+        yield return new WaitForSeconds(2);
+        VictoryScreen.SetActive(true);
         yield return new WaitForSeconds(5);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
