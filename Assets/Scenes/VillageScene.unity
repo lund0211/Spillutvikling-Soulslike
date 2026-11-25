@@ -1862,6 +1862,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69944498}
   m_CullTransparentMesh: 1
+--- !u!84 &70201499
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WaterDepthMap
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 6
+  m_Width: 1024
+  m_Height: 1024
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_UseDynamicScaleExplicit: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &70877591
 GameObject:
   m_ObjectHideFlags: 0
@@ -18639,6 +18676,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b294d01f00a1a3c4ab4344a487857c00, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1448710102}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b294d01f00a1a3c4ab4344a487857c00, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1448710103}
   m_SourcePrefab: {fileID: 100100000, guid: b294d01f00a1a3c4ab4344a487857c00, type: 3}
 --- !u!1001 &771586424
 PrefabInstance:
@@ -33543,6 +33583,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37ab8f8a7000cb49a8d2b5e96cd0b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HugeRatBehavior
+  interactionPanel: {fileID: 320984142}
+  npcDialogueManager: {fileID: 1483507847}
+  dialogue:
+  - Well,well... You actually made it here.
+  - What? You've never seen a talking rat before?
+  - Want to hear a joke?
+  - Why did the assassin break up with the archer?
+  - He couldn't commit to a long-range relationship.
+  - HAHAHA...That joke had a sharp point.
+  - Sorry...I'm feeling a bit desynchronized today.
+  - But hey...I'm just here for the view(points).
+  - I used to be an assassin, but I kept ratting out the Brotherhood.
+  - 'Okay, well then...time for you to go. '
+  - And remember.... Nothing is true, everything is permitted.
+  - Except touching my cheese.
 --- !u!195 &1448710102
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -33565,6 +33620,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &1448710103
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448710096}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1448843654
 PrefabInstance:
   m_ObjectHideFlags: 0
