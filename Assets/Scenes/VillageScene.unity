@@ -1862,6 +1862,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69944498}
   m_CullTransparentMesh: 1
+--- !u!84 &70201499
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WaterDepthMap
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 6
+  m_Width: 1024
+  m_Height: 1024
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_UseDynamicScaleExplicit: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &70877591
 GameObject:
   m_ObjectHideFlags: 0
@@ -18445,6 +18482,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b294d01f00a1a3c4ab4344a487857c00, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1448710102}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b294d01f00a1a3c4ab4344a487857c00, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1448710103}
   m_SourcePrefab: {fileID: 100100000, guid: b294d01f00a1a3c4ab4344a487857c00, type: 3}
 --- !u!1001 &771586424
 PrefabInstance:
@@ -33237,6 +33277,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37ab8f8a7000cb49a8d2b5e96cd0b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HugeRatBehavior
+  interactionPanel: {fileID: 320984142}
+  npcDialogueManager: {fileID: 1483507847}
+  dialogue:
+  - Well,well... You actually made it here.
+  - What? You've never seen a talking rat before?
+  - Want to hear a joke?
+  - Why did the assassin break up with the archer?
+  - He couldn't commit to a long-range relationship.
+  - HAHAHA...That joke had a sharp point.
+  - Sorry...I'm feeling a bit desynchronized today.
+  - But hey...I'm just here for the view(points).
+  - I used to be an assassin, but I kept ratting out the Brotherhood.
+  - 'Okay, well then...time for you to go. '
+  - And remember.... Nothing is true, everything is permitted.
+  - Except touching my cheese.
 --- !u!195 &1448710102
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -33259,6 +33314,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &1448710103
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448710096}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1448843654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80586,64 +80662,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: 74843168197e40948b5c8bd9d6b0b70d, type: 3}
   m_PrefabInstance: {fileID: 405016884}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1984281271
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1984281272}
-  m_Layer: 0
-  m_Name: House2_interior
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1984281272
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1984281271}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1307976239}
-  - {fileID: 144169749}
-  - {fileID: 1863815892}
-  - {fileID: 533056189}
-  - {fileID: 2126998629}
-  - {fileID: 1073415063}
-  - {fileID: 946411903}
-  - {fileID: 336748782}
-  - {fileID: 1029755252}
-  - {fileID: 1633182044}
-  - {fileID: 245085490}
-  - {fileID: 288607069}
-  - {fileID: 958614581}
-  - {fileID: 283942904}
-  - {fileID: 2113927856}
-  - {fileID: 1627696688}
-  - {fileID: 419859292}
-  - {fileID: 482819536}
-  - {fileID: 1067135689}
-  - {fileID: 768653971}
-  - {fileID: 443900132}
-  - {fileID: 1652631796}
-  - {fileID: 140834095}
-  - {fileID: 489818766}
-  - {fileID: 1443326271}
-  - {fileID: 483424265}
-  - {fileID: 1778804975}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1982276320
 GameObject:
   m_ObjectHideFlags: 0
@@ -80756,6 +80774,64 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982276320}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1984281271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1984281272}
+  m_Layer: 0
+  m_Name: House2_interior
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1984281272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984281271}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1307976239}
+  - {fileID: 144169749}
+  - {fileID: 1863815892}
+  - {fileID: 533056189}
+  - {fileID: 2126998629}
+  - {fileID: 1073415063}
+  - {fileID: 946411903}
+  - {fileID: 336748782}
+  - {fileID: 1029755252}
+  - {fileID: 1633182044}
+  - {fileID: 245085490}
+  - {fileID: 288607069}
+  - {fileID: 958614581}
+  - {fileID: 283942904}
+  - {fileID: 2113927856}
+  - {fileID: 1627696688}
+  - {fileID: 419859292}
+  - {fileID: 482819536}
+  - {fileID: 1067135689}
+  - {fileID: 768653971}
+  - {fileID: 443900132}
+  - {fileID: 1652631796}
+  - {fileID: 140834095}
+  - {fileID: 489818766}
+  - {fileID: 1443326271}
+  - {fileID: 483424265}
+  - {fileID: 1778804975}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1986914466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81758,43 +81834,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 479a4573d28ea7d41a96a8d2e3225a31, type: 3}
---- !u!84 &2041849250
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: WaterDepthMap
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 6
-  m_Width: 1024
-  m_Height: 1024
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_UseDynamicScaleExplicit: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &2048226372
 GameObject:
   m_ObjectHideFlags: 0
